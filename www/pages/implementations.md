@@ -105,80 +105,6 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
     </div>
 </div>
 
-## Implementation Documentation
-
-Each implementation has (or will have) a dedicated documentation page with:
-
-- **Installation Instructions**: How to add the implementation to your project
-- **Basic Usage Examples**: Code samples for all three encryption modes
-- **API Documentation**: Detailed method descriptions and parameter explanations
-- **Implementation Details**: Information about the underlying cryptographic operations
-- **Performance Considerations**: Guidance on optimizing for different use cases
-- **Test Vectors**: Information on verifying the implementation
-
-Currently, detailed documentation is available for:
-- [Python Implementation]({{ site.baseurl }}/implementations/python/)
-
-We're working on creating similar documentation for all other implementations. If you'd like to contribute documentation for an implementation, please see the [contribution guidelines]({{ site.baseurl }}/community/).
-
-## Implementation Features
-
-All implementations provide the following features:
-
-- **Multiple Encryption Modes**: Support for `ipcrypt-deterministic`, `ipcrypt-nd`, and `ipcrypt-ndx`
-- **IPv4 and IPv6 Support**: Uniform handling of both address types
-- **Format Preservation**: Deterministic mode preserves IP address format
-- **Correlation Protection**: Non-deterministic modes prevent correlation attacks
-- **Test Vector Compliance**: Verified against the specification's test vectors
-
-## Choosing an Implementation
-
-Thanks to IPCrypt's consistent approach, all implementations provide identical cryptographic guarantees and functionality. This means you can choose an implementation based primarily on practical considerations rather than security differences:
-
-1. **Language Compatibility**: Choose an implementation that integrates well with your existing codebase
-2. **Performance Requirements**: Some implementations (like C and Rust) may offer better performance
-3. **Platform Constraints**: Consider browser compatibility, memory usage, and deployment environment
-4. **Feature Needs**: All implementations support the core features, but some may offer additional utilities
-5. **Maintenance Preferences**: Consider your team's familiarity with the language and ecosystem
-
-The beauty of IPCrypt's design is that you can switch between implementations as your needs evolve, without changing the underlying security properties or encryption results.
-
-## Implementation Details
-
-Each implementation page provides:
-
-- Installation instructions
-- Basic usage examples
-- API documentation
-- Advanced usage patterns
-- Performance considerations
-- Links to source code repositories
-
-## Creating a New Implementation
-
-If you'd like to create an implementation in a language not currently supported, please follow these guidelines:
-
-1. Implement all three encryption modes as specified in the document
-2. Verify your implementation against the test vectors
-3. Document your API and provide usage examples
-4. Submit your implementation to the [GitHub repository]({{ site.github_repo }})
-
-### Documentation Template
-
-To ensure consistency across implementation documentation, we recommend creating a documentation page with the following structure:
-
-1. **Overview**: Brief description of the implementation
-2. **Installation**: How to install or include the implementation
-3. **Requirements**: Dependencies and system requirements
-4. **Usage Examples**: Code samples for all three encryption modes
-5. **API Reference**: Detailed method descriptions
-6. **Implementation Details**: Technical information about the implementation
-7. **Performance Considerations**: Guidance on optimizing for different use cases
-8. **Test Vectors**: Information on verifying the implementation
-9. **License**: Licensing information
-
-You can use the [Python implementation documentation]({{ site.baseurl }}/implementations/python/) as a reference. For detailed guidance on creating a new implementation, see the [contribution guidelines]({{ site.baseurl }}/community/).
-
 ## Implementation Comparison
 
 <div class="overflow-x-auto">
@@ -279,21 +205,3 @@ You can use the [Python implementation documentation]({{ site.baseurl }}/impleme
         </tbody>
             </table>
         </div>
-        
-        ## Contributing to Implementations
-        
-        We welcome contributions to existing implementations and the creation of new ones. Here are some ways you can contribute:
-        
-        1. **Bug Fixes**: Help improve existing implementations by fixing bugs or addressing issues
-        2. **Performance Improvements**: Optimize implementations for better performance
-        3. **Documentation**: Create or improve documentation for implementations
-        4. **New Features**: Add new features or enhancements to existing implementations
-        5. **New Implementations**: Create implementations for languages not currently supported
-        
-        If you're interested in contributing, please:
-        
-        1. Check the [GitHub repository]({{ site.github_repo }}) for open issues
-        2. Review the [contribution guidelines]({{ site.baseurl }}/community/)
-        3. Join the [community discussion]({{ site.baseurl }}/community/) to coordinate with other contributors
-        
-        Your contributions help make IPCrypt more accessible and useful for everyone!
