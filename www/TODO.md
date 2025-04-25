@@ -10,7 +10,7 @@ This document outlines planned improvements and future tasks for the IPCrypt web
 - [x] Create implementation-specific pages with code examples
 - [x] Add a FAQ section addressing common questions
 - [x] Create a glossary of terms for technical concepts
-- [ ] Add case studies or examples of IPCrypt in real-world applications
+- [x] Add case studies or examples of IPCrypt in real-world applications
 
 ### Design Improvements
 
