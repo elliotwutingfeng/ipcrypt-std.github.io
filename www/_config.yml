@@ -95,6 +95,8 @@ navigation:
     url: /playground/
   - title: Code Examples
     url: /code-examples/
+  - title: FAQ
+    url: /faq/
   - title: Developer Resources
     url: /resources/
   - title: Community
