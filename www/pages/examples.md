@@ -326,4 +326,4 @@ def get_data():
 
 Ready to implement IPCrypt in your own project? Check out our [developer resources](/resources/) for guides, examples, and best practices.
 
-For a hands-on experience, visit the [interactive playground](/examples/playground/) to experiment with different encryption modes and parameters.
+For a hands-on experience, visit the [interactive playground](/playground/) to experiment with different encryption modes and parameters.
