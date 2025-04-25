@@ -35,9 +35,11 @@ jobs:
       - name: Build with Jekyll
         run: |
           cd www
-          gem install bundler -v "~> 2.4"
-          bundle install
-          bundle exec jekyll build
+          gem install bundler -v "~> 2.6"
+          # Use the full path to the new bundler to avoid using the pre-installed one
+          $(which bundle) --version
+          $(which bundle) install
+          $(which bundle) exec jekyll build
         env:
           JEKYLL_ENV: production
       
