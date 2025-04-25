@@ -6,7 +6,7 @@ This document outlines planned improvements and future tasks for the IPCrypt web
 
 ### Content Completion
 
-- [ ] Add detailed explanations of each encryption mode with diagrams
+- [x] Add detailed explanations of each encryption mode with diagrams
 - [x] Create implementation-specific pages with code examples
 - [x] Add a FAQ section addressing common questions
 - [x] Create a glossary of terms for technical concepts
