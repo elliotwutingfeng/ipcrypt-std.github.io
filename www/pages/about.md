@@ -7,44 +7,44 @@ permalink: /about/
 
 ## What is IPCrypt?
 
-IPCrypt is a specification that defines well-defined methods for encrypting and obfuscating IP addresses. It provides both deterministic format-preserving and non-deterministic constructions that apply uniformly to both IPv4 and IPv6 addresses.
+IPCrypt is a simple, open specification that suggests methods for encrypting and obfuscating IP addresses. Created by volunteers, it offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
 
-The specification was developed to address privacy concerns raised in [RFC6973](https://datatracker.ietf.org/doc/html/rfc6973) and [RFC7258](https://datatracker.ietf.org/doc/html/rfc7258) regarding pervasive monitoring and data collection, while maintaining the operational utility of IP addresses in network operations and analytics.
+This community-driven effort was inspired by privacy concerns highlighted in [RFC6973](https://datatracker.ietf.org/doc/html/rfc6973) and [RFC7258](https://datatracker.ietf.org/doc/html/rfc7258) about pervasive monitoring and data collection. We aimed to help maintain the practical utility of IP addresses in network operations while addressing these privacy considerations.
 
-## The Problem IPCrypt Solves
+## The Challenge We're Trying to Help With
 
-IP addresses are essential for network operations but also raise significant privacy concerns:
+IP addresses are fundamental to network operations but present some privacy challenges:
 
-1. **Privacy Exposure**: IP addresses can reveal user location, identity, and browsing habits
-2. **Regulatory Compliance**: Many jurisdictions classify IP addresses as personal data (e.g., GDPR)
-3. **Data Sharing Limitations**: Inability to share network data for research or analysis
-4. **Third-Party Service Risks**: Exposing raw IP addresses to external services creates privacy risks
-5. **Inconsistent Ad-hoc Solutions**: Organizations implement varied, often insecure methods to protect IP addresses
+1. **Privacy Considerations**: IP addresses can potentially reveal information about users
+2. **Regulatory Context**: Some jurisdictions consider IP addresses as personal data (e.g., GDPR)
+3. **Research Limitations**: Difficulty sharing network data for research or analysis
+4. **Service Provider Concerns**: Sharing raw IP addresses with external services raises privacy questions
+5. **Varied Approaches**: Different organizations use different methods to protect IP addresses
 
-IPCrypt addresses these challenges by providing a cryptographically sound, consistent approach to IP address encryption and obfuscation.
+IPCrypt tries to offer a simple, consistent approach to IP address encryption that anyone can implement.
 
-## Key Benefits
+## Potential Benefits
 
 ### For Network Operators
 
-- **Maintain Operational Functionality**: Continue using IP addresses for routing, logging, and analytics while protecting user privacy
-- **Regulatory Compliance**: Help meet data protection requirements by encrypting personal identifiers
-- **Simplified Data Sharing**: Share network data with researchers or partners without exposing sensitive information
-- **Consistent Implementation**: Replace ad-hoc mechanisms with a well-defined specification
+- **Practical Functionality**: Use IP addresses for routing, logging, and analytics while considering privacy
+- **Regulatory Considerations**: May help with data protection requirements by encrypting identifiers
+- **Research Possibilities**: Share network data with researchers without exposing raw addresses
+- **Common Approach**: Use a shared specification instead of creating custom solutions
 
 ### For Privacy Advocates
 
-- **Enhanced User Privacy**: Protect user identity and location information in logs and analytics
-- **Reduced Correlation Risk**: Non-deterministic modes prevent tracking across different datasets
-- **Transparent Protection**: Clearly defined cryptographic methods with known security properties
-- **Broad Applicability**: Works with both IPv4 and IPv6 addresses across various systems
+- **User Privacy**: Help protect user information in logs and analytics
+- **Reduced Tracking**: Non-deterministic modes can prevent correlation across datasets
+- **Open Methods**: Clearly defined cryptographic approaches with known properties
+- **Versatile Application**: Works with both IPv4 and IPv6 addresses
 
 ### For Developers
 
-- **Multiple Implementations**: Choose from implementations in various programming languages
-- **Flexible Modes**: Select the appropriate mode based on specific privacy and operational requirements
-- **Simple Integration**: Easy to integrate into existing systems with minimal changes
-- **Well-Documented Standard**: Clear specification with test vectors and examples
+- **Community Implementations**: Free implementations available in various programming languages
+- **Different Options**: Choose the mode that fits your specific needs
+- **Straightforward Integration**: Designed to be simple to add to existing systems
+- **Open Documentation**: Clear specification with examples to help implementation
 
 ## How IPCrypt Works
 

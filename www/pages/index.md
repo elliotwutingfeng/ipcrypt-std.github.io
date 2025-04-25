@@ -7,9 +7,9 @@ permalink: /
 
 <section class="hero">
     <div class="container mx-auto px-4 py-12 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">Protect IP Addresses with Consistent Encryption</h1>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">A Community Approach to IP Address Encryption</h1>
         <p class="text-xl max-w-3xl mx-auto mb-8">
-            IPCrypt provides well-defined methods for encrypting and obfuscating IP addresses, addressing privacy concerns while maintaining functionality for network operations and analytics.
+            IPCrypt is a free, open specification created by volunteers to help encrypt and obfuscate IP addresses, balancing privacy considerations with practical network operations.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ site.baseurl }}/about/" class="btn btn-primary">Learn More</a>
@@ -23,13 +23,13 @@ permalink: /
         <div class="max-w-3xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 text-center">What is IPCrypt?</h2>
             <p class="text-lg mb-6">
-                IPCrypt is a specification that defines methods for encrypting and obfuscating IP addresses for both operational use and privacy preservation. It enables network operators, researchers, and privacy advocates to share or analyze data while protecting sensitive address information.
+                IPCrypt is a community-created specification that suggests methods for encrypting and obfuscating IP addresses. It aims to help network operators, researchers, and privacy advocates share or analyze data while considering address privacy.
             </p>
             <p class="text-lg mb-6">
-                The specification provides both deterministic format-preserving and non-deterministic constructions that apply uniformly to both IPv4 and IPv6 addresses.
+                The specification offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
             </p>
             <p class="text-lg mb-6">
-                <strong>Elegant simplicity</strong> is at the core of IPCrypt's design philosophy. Rather than pursuing technical innovation for its own sake, IPCrypt relies exclusively on established cryptographic standards to ensure robust implementation across platforms.
+                <strong>Simplicity</strong> is a core value in IPCrypt's design. Rather than trying to create new cryptographic methods, we've used established standards that are well-understood and widely available, making it easier for anyone to implement.
             </p>
         </div>
     </div>
@@ -87,13 +87,13 @@ permalink: /
 
 <section class="py-12 bg-white">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-6 text-center">Pragmatic Standardization</h2>
+        <h2 class="text-3xl font-bold mb-6 text-center">A Community Approach</h2>
         <div class="max-w-3xl mx-auto">
             <p class="text-lg mb-6">
-                IPCrypt serves as a <strong>proposed solution</strong> that prioritizes reliability and ease of adoption over unnecessary complexity. By providing clear guidance and interoperability, IPCrypt enables organizations to implement secure IP address encryption with confidence.
+                IPCrypt is a <strong>volunteer-created specification</strong> that tries to be practical and easy to implement. We've focused on clarity and simplicity so that anyone can understand and use it, regardless of their resources or expertise.
             </p>
             <p class="text-lg mb-6">
-                Rather than reinventing the wheel, IPCrypt leverages well-established cryptographic primitives and provides a consistent framework that can be implemented across diverse environments and programming languages.
+                We've built on existing, well-tested cryptographic methods rather than creating new ones. Our goal is to provide a helpful resource that can be freely implemented in any programming language or environment.
             </p>
         </div>
     </div>
@@ -142,17 +142,17 @@ permalink: /
 
 <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-6 text-center">Multiple Language Implementations</h2>
+        <h2 class="text-3xl font-bold mb-6 text-center">Community Implementations</h2>
         <div class="max-w-4xl mx-auto">
             <div class="card">
                 <div class="flex flex-col md:flex-row items-center">
                     <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
-                        <h3 class="text-xl font-bold mb-3">Available in 8+ Programming Languages</h3>
+                        <h3 class="text-xl font-bold mb-3">Freely Available in Several Programming Languages</h3>
                         <p class="mb-4">
-                            IPCrypt has been implemented in Python, C, Rust, JavaScript, Go, Zig, PHP, D, and more to ensure broad accessibility across different platforms and environments.
+                            Thanks to community contributors, IPCrypt has been implemented in Python, C, Rust, JavaScript, Go, Zig, PHP, D, and more, making it accessible to developers across different platforms.
                         </p>
                         <p class="mb-6">
-                            Each implementation follows the specification and provides the same cryptographic guarantees while leveraging language-specific features.
+                            Each implementation is open source and follows the same specification, allowing developers to choose the language that best fits their project.
                         </p>
                         <a href="{{ site.baseurl }}/implementations/" class="btn btn-primary">Browse All Implementations</a>
                     </div>
@@ -205,9 +205,9 @@ permalink: /
 
 <section class="py-12 bg-gray-50">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="text-3xl font-bold mb-6">Get Started with IPCrypt</h2>
+        <h2 class="text-3xl font-bold mb-6">Join the Community</h2>
         <p class="text-lg max-w-3xl mx-auto mb-8">
-            Ready to implement IPCrypt in your project? Check out our developer resources, try the interactive playground, and choose from multiple language implementations.
+            Interested in using or contributing to IPCrypt? Explore our resources, try the interactive playground, or check out the open source implementations. All are freely available for anyone to use.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="https://jedisct1.github.io/draft-denis-ipcrypt/draft-denis-ipcrypt.html" class="btn btn-secondary" target="_blank" rel="noopener">Read the Specification</a>
