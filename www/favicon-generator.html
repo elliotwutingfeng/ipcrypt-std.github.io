@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPCrypt Favicon Generator</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          margin: 0;
+          background-color: #f0f4f8;
+          padding: 20px;
+      }
+      
+      .logo-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          max-width: 1200px;
+      }
+      
+      .logos-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 20px;
+          width: 100%;
+          margin-bottom: 40px;
+      }
+      
+      .logo-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: white;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      
+      .logo-title {
+          margin-bottom: 10px;
+          font-weight: bold;
+          color: #2563eb;
+      }
+      
+      .logo {
+          background: linear-gradient(135deg, #2563eb, #1d4ed8);
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+      }
+      
+      .logo-512 {
+          width: 512px;
+          height: 512px;
+          border-radius: 80px;
+      }
+      
+      .logo-192 {
+          width: 192px;
+          height: 192px;
+          border-radius: 30px;
+      }
+      
+      .logo-180 {
+          width: 180px;
+          height: 180px;
+          border-radius: 28px;
+      }
+      
+      .logo-32 {
+          width: 32px;
+          height: 32px;
+          border-radius: 6px;
+      }
+      
+      .logo-16 {
+          width: 16px;
+          height: 16px;
+          border-radius: 3px;
+      }
+        
+        .grid-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            opacity: 0.15;
+        }
+        
+        .grid-cell {
+            margin: 8px;
+            background-color: white;
+            border-radius: 4px;
+        }
+        
+        .lock {
+            position: absolute;
+            top: 160px;
+            right: 96px;
+            width: 128px;
+            height: 160px;
+            background-color: white;
+            border-radius: 16px;
+        }
+        
+        .lock::before {
+            content: '';
+            position: absolute;
+            top: -64px;
+            left: 24px;
+            width: 80px;
+            height: 80px;
+            border: 24px solid white;
+            border-bottom: none;
+            border-radius: 40px 40px 0 0;
+        }
+        
+        .lock-keyhole {
+            position: absolute;
+            top: 40px;
+            left: 24px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border-radius: 8px;
+        }
+        
+        .text {
+            position: absolute;
+            bottom: 160px;
+            left: 112px;
+            color: white;
+            font-size: 120px;
+            font-weight: bold;
+        }
+        
+        .instructions {
+            margin-top: 40px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+        
+        h1 {
+            margin-top: 0;
+            color: #2563eb;
+        }
+        
+        ol {
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="logo-container">
+      <h1>IPCrypt Favicon Generator</h1>
+      <p>This page displays the IPCrypt logo in various sizes for favicon generation. Take screenshots of each size as needed.</p>
+      <div class="logos-grid">
+        <div class="logo-wrapper">
+          <div class="logo-title">android-chrome-512x512.png</div>
+          <div class="logo logo-512" id="logo-512">
+            <div class="grid-pattern grid-512">
+              <!-- Grid cells will be added via JavaScript -->
+            </div>
+            <div class="lock">
+              <div class="lock-keyhole"></div>
+            </div>
+            <div class="text">IP</div>
+          </div>
+        </div>
+        <div class="logo-wrapper">
+          <div class="logo-title">android-chrome-192x192.png</div>
+          <div class="logo logo-192" id="logo-192">
+            <div class="text" style="font-size: 48px; bottom: 60px; left: 44px;">IP</div>
+          </div>
+        </div>
+        <div class="logo-wrapper">
+          <div class="logo-title">apple-touch-icon.png (180x180)</div>
+          <div class="logo logo-180" id="logo-180">
+            <div class="text" style="font-size: 45px; bottom: 56px; left: 42px;">IP</div>
+          </div>
+        </div>
+        <div class="logo-wrapper">
+          <div class="logo-title">favicon-32x32.png</div>
+          <div class="logo logo-32" id="logo-32">
+            <div class="text" style="font-size: 8px; bottom: 10px; left: 8px;">IP</div>
+          </div>
+        </div>
+        <div class="logo-wrapper">
+          <div class="logo-title">favicon-16x16.png</div>
+          <div class="logo logo-16" id="logo-16">
+            <div class="text" style="font-size: 4px; bottom: 5px; left: 4px;">IP</div>
+          </div>
+        </div>
+      </div>
+      <div class="instructions">
+        <h2>Instructions</h2>
+        <ol>
+          <li>Take screenshots of each logo size above</li>
+          <li>Save each screenshot with the appropriate filename in the
+            <code>www/assets/images</code>
+            directory</li>
+          <li>For favicon.ico, use a tool like
+            <a href="https://realfavicongenerator.net/" target="_blank">RealFaviconGenerator.net</a>
+            to convert the 32x32 image</li>
+          <li>Update the HTML head section in
+            <code>_layouts/default.html</code>
+            to reference these files</li>
+        </ol>
+      </div>
+    </div>
+    <script>
+      // Add grid cells to the 512px logo
+        const gridPattern = document.querySelector('.grid-512');
+        if (gridPattern) {
+            for (let i = 0; i < 16; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'grid-cell';
+                gridPattern.appendChild(cell);
+            }
+        }
+    </script>
+  </body>
+</html>
