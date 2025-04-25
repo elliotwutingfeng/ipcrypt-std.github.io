@@ -6,8 +6,8 @@ description: >-
   Methods for IP Address Encryption and Obfuscation -
   A standardized approach to encrypting and obfuscating IP addresses
   for privacy preservation and operational use.
-baseurl: "/draft-denis-ipcrypt" # the subpath of your site, e.g. /blog
-url: "https://jedisct1.github.io" # the base hostname & protocol for your site
+baseurl: "" # empty for root URL
+url: "https://ipcrypt.stdc.org" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
