@@ -1,0 +1,60 @@
+{
+    "name": "ipcrypt-website",
+    "version": "1.0.0",
+    "description": "Website for IPCrypt - Methods for IP Address Encryption and Obfuscation",
+    "private": true,
+    "scripts": {
+        "start": "bundle exec jekyll serve",
+        "build": "bundle exec jekyll build",
+        "css": "postcss assets/css/main.css -o _site/assets/css/main.css",
+        "watch:css": "postcss assets/css/main.css -o _site/assets/css/main.css --watch",
+        "lint:js": "eslint assets/js/**/*.js",
+        "lint:css": "stylelint assets/css/**/*.css",
+        "lint": "npm run lint:js && npm run lint:css",
+        "optimize:images": "imagemin assets/images/* --out-dir=_site/assets/images",
+        "dev": "concurrently \"npm run start\" \"npm run watch:css\"",
+        "clean": "rm -rf _site .jekyll-cache .sass-cache",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jedisct1/draft-denis-ipcrypt.git"
+    },
+    "keywords": [
+        "ipcrypt",
+        "ip",
+        "encryption",
+        "privacy",
+        "obfuscation",
+        "ietf"
+    ],
+    "author": "IPCrypt Contributors",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jedisct1/draft-denis-ipcrypt/issues"
+    },
+    "homepage": "https://github.com/jedisct1/draft-denis-ipcrypt#readme",
+    "devDependencies": {
+        "autoprefixer": "^10.4.14",
+        "browser-sync": "^2.29.3",
+        "concurrently": "^8.2.0",
+        "cssnano": "^6.0.1",
+        "eslint": "^8.44.0",
+        "imagemin-cli": "^7.0.0",
+        "postcss": "^8.4.25",
+        "postcss-cli": "^10.1.0",
+        "postcss-import": "^15.1.0",
+        "postcss-nested": "^6.0.1",
+        "stylelint": "^15.10.1",
+        "tailwindcss": "^3.3.2"
+    },
+    "dependencies": {
+        "alpinejs": "^3.12.3",
+        "prismjs": "^1.29.0"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead"
+    ]
+}

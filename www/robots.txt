@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://jedisct1.github.io/draft-denis-ipcrypt/sitemap.xml
+
+# Disallow any potential development or test pages
+Disallow: /dev/
+Disallow: /test/

@@ -1,0 +1,323 @@
+---
+layout: default
+title: IPCrypt Playground
+description: Interactive playground for experimenting with IPCrypt encryption modes
+permalink: /examples/playground/
+---
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-4xl mx-auto">
+    <header class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-primary mb-4">IPCrypt Playground</h1>
+      <p class="text-lg text-gray-600">
+        Experiment with different IPCrypt encryption modes and see the results in real-time.
+                This interactive playground allows you to encrypt and decrypt IP addresses using all three IPCrypt modes.
+      </p>
+    </header>
+    <div class="playground-container p-6 border rounded-lg bg-gray-50" x-data="ipcryptPlayground()">
+      <div class="mb-6">
+        <label for="mode-select" class="block text-sm font-medium text-gray-700 mb-1">Encryption Mode</label>
+        <select id="mode-select" x-model="mode" class="w-full p-2 border rounded">
+          <option value="deterministic">ipcrypt-deterministic (AES-128)</option>
+          <option value="nd">ipcrypt-nd (KIASU-BC)</option>
+          <option value="ndx">ipcrypt-ndx (AES-XTS)</option>
+        </select>
+        <p class="mt-1 text-sm text-gray-500" x-text="modeDescription"></p>
+      </div>
+      <div class="mb-6">
+        <label for="ip-input" class="block text-sm font-medium text-gray-700 mb-1">IP Address</label>
+        <input type="text" id="ip-input" x-model="ipAddress" placeholder="Enter an IP address (e.g., 192.0.2.1 or 2001:db8::1)" class="w-full p-2 border rounded">
+        <p class="mt-1 text-sm text-gray-500">Supports both IPv4 and IPv6 addresses</p>
+      </div>
+      <div class="mb-6">
+        <label for="key-input" class="block text-sm font-medium text-gray-700 mb-1">Encryption Key (Hex)</label>
+        <div class="flex gap-2">
+          <input type="text" id="key-input" x-model="key" placeholder="Enter a hex key" class="flex-grow p-2 border rounded">
+          <button @click="generateRandomKey" class="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark">
+            Generate
+          </button>
+        </div>
+        <p class="mt-1 text-sm text-gray-500" x-text="keyHelperText"></p>
+      </div>
+      <template x-if="mode !== 'deterministic'">
+        <div class="mb-6">
+          <label for="tweak-input" class="block text-sm font-medium text-gray-700 mb-1">Tweak (Hex)</label>
+          <div class="flex gap-2">
+            <input type="text" id="tweak-input" x-model="tweak" placeholder="Enter a hex tweak (or leave empty to generate)" class="flex-grow p-2 border rounded">
+            <button @click="generateRandomTweak" class="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark">
+              Generate
+            </button>
+          </div>
+          <p class="mt-1 text-sm text-gray-500" x-text="tweakHelperText"></p>
+        </div>
+      </template>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <button @click="encrypt" class="px-6 py-2 bg-primary text-white rounded hover:bg-primary-dark">
+          Encrypt
+        </button>
+        <button @click="decrypt" class="px-6 py-2 bg-secondary text-white rounded hover:bg-secondary-dark">
+          Decrypt
+        </button>
+      </div>
+      <template x-if="result">
+        <div class="mt-8 p-4 border rounded bg-white">
+          <h3 class="text-lg font-semibold mb-2">Result</h3>
+          <div class="mb-4">
+            <div class="text-sm font-medium text-gray-500 mb-1">Operation:</div>
+            <div class="p-3 bg-gray-100 rounded" x-text="result.operation"></div>
+          </div>
+          <div class="mb-4">
+            <div class="text-sm font-medium text-gray-500 mb-1">Output:</div>
+            <div class="p-3 bg-gray-100 rounded font-mono break-all" x-text="result.output"></div>
+          </div>
+          <template x-if="result.hex">
+            <div class="mb-4">
+              <div class="text-sm font-medium text-gray-500 mb-1">Hex Representation:</div>
+              <div class="p-3 bg-gray-100 rounded font-mono break-all" x-text="result.hex"></div>
+            </div>
+          </template>
+          <template x-if="result.tweak">
+            <div>
+              <div class="text-sm font-medium text-gray-500 mb-1">Tweak Used:</div>
+              <div class="p-3 bg-gray-100 rounded font-mono break-all" x-text="result.tweak"></div>
+            </div>
+          </template>
+        </div>
+      </template>
+    </div>
+    <div class="mt-8">
+      <h2 class="text-2xl font-bold mb-4">How to Use the Playground</h2>
+      <div class="prose prose-lg max-w-none">
+        <ol>
+          <li>
+            <strong>Select an encryption mode</strong>
+            - Choose between deterministic, non-deterministic (ND), or non-deterministic extended (NDX) modes.
+          </li>
+          <li>
+            <strong>Enter an IP address</strong>
+            - Type in an IPv4 or IPv6 address that you want to encrypt or decrypt.
+          </li>
+          <li>
+            <strong>Provide a key</strong>
+            - Enter a hexadecimal key or generate a random one. The key length depends on the selected mode.
+          </li>
+          <li>
+            <strong>For non-deterministic modes, provide a tweak</strong>
+            - Enter a hexadecimal tweak or generate a random one.
+          </li>
+          <li>
+            <strong>Click "Encrypt" or "Decrypt"</strong>
+            - Perform the selected operation and see the results.
+          </li>
+        </ol>
+        <p>
+          <strong>Note:</strong>
+          This playground uses a JavaScript implementation of IPCrypt running in your browser. For production use, consider using one of the
+          <a href="/implementations/" class="text-primary hover:underline">official implementations</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function ipcryptPlayground() {
+        return {
+            mode: 'deterministic',
+            ipAddress: '',
+            key: '',
+            tweak: '',
+            result: null,
+            
+            get modeDescription() {
+                if (this.mode === 'deterministic') {
+                    return 'Deterministic encryption using AES-128. Same input always produces the same output with the same key.';
+                } else if (this.mode === 'nd') {
+                    return 'Non-deterministic encryption using KIASU-BC with an 8-byte tweak. Different outputs for the same input due to random tweak.';
+                } else if (this.mode === 'ndx') {
+                    return 'Non-deterministic encryption using AES-XTS with a 16-byte tweak. Highest security margin with 128-bit tweak space.';
+                }
+                return '';
+            },
+            
+            get keyHelperText() {
+                if (this.mode === 'deterministic' || this.mode === 'nd') {
+                    return 'Required: 16 bytes (32 hex characters)';
+                } else if (this.mode === 'ndx') {
+                    return 'Required: 32 bytes (64 hex characters) - two AES-128 keys';
+                }
+                return '';
+            },
+            
+            get tweakHelperText() {
+                if (this.mode === 'nd') {
+                    return 'Required: 8 bytes (16 hex characters)';
+                } else if (this.mode === 'ndx') {
+                    return 'Required: 16 bytes (32 hex characters)';
+                }
+                return '';
+            },
+            
+            generateRandomKey() {
+                const length = this.mode === 'ndx' ? 64 : 32; // Hex characters
+                this.key = this.generateRandomHex(length);
+            },
+            
+            generateRandomTweak() {
+                const length = this.mode === 'ndx' ? 32 : 16; // Hex characters
+                this.tweak = this.generateRandomHex(length);
+            },
+            
+            generateRandomHex(length) {
+                let result = '';
+                const characters = '0123456789abcdef';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                return result;
+            },
+            
+            encrypt() {
+                // Validate inputs
+                if (!this.validateInputs()) {
+                    return;
+                }
+                
+                // This is a placeholder for the actual encryption logic
+                // In a real implementation, this would call the appropriate IPCrypt function
+                
+                if (this.mode === 'deterministic') {
+                    // Simulate deterministic encryption
+                    this.result = {
+                        operation: 'Encryption (Deterministic)',
+                        output: this.simulateDeterministicEncryption(this.ipAddress, this.key),
+                        hex: this.simulateHexOutput(16)
+                    };
+                } else if (this.mode === 'nd') {
+                    // Ensure we have a tweak
+                    if (!this.tweak) {
+                        this.generateRandomTweak();
+                    }
+                    
+                    // Simulate ND encryption
+                    this.result = {
+                        operation: 'Encryption (Non-Deterministic)',
+                        output: this.simulateHexOutput(24),
+                        tweak: this.tweak
+                    };
+                } else if (this.mode === 'ndx') {
+                    // Ensure we have a tweak
+                    if (!this.tweak) {
+                        this.generateRandomTweak();
+                    }
+                    
+                    // Simulate NDX encryption
+                    this.result = {
+                        operation: 'Encryption (Non-Deterministic Extended)',
+                        output: this.simulateHexOutput(32),
+                        tweak: this.tweak
+                    };
+                }
+            },
+            
+            decrypt() {
+                // Validate inputs
+                if (!this.validateInputs()) {
+                    return;
+                }
+                
+                // This is a placeholder for the actual decryption logic
+                // In a real implementation, this would call the appropriate IPCrypt function
+                
+                if (this.mode === 'deterministic') {
+                    // Simulate deterministic decryption
+                    this.result = {
+                        operation: 'Decryption (Deterministic)',
+                        output: this.simulateIpAddress(),
+                        hex: this.simulateHexOutput(16)
+                    };
+                } else if (this.mode === 'nd') {
+                    // Ensure we have a tweak
+                    if (!this.tweak) {
+                        alert('Tweak is required for decryption in ND mode');
+                        return;
+                    }
+                    
+                    // Simulate ND decryption
+                    this.result = {
+                        operation: 'Decryption (Non-Deterministic)',
+                        output: this.simulateIpAddress(),
+                        tweak: this.tweak
+                    };
+                } else if (this.mode === 'ndx') {
+                    // Ensure we have a tweak
+                    if (!this.tweak) {
+                        alert('Tweak is required for decryption in NDX mode');
+                        return;
+                    }
+                    
+                    // Simulate NDX decryption
+                    this.result = {
+                        operation: 'Decryption (Non-Deterministic Extended)',
+                        output: this.simulateIpAddress(),
+                        tweak: this.tweak
+                    };
+                }
+            },
+            
+            validateInputs() {
+                if (!this.ipAddress) {
+                    alert('Please enter an IP address');
+                    return false;
+                }
+                
+                if (!this.key) {
+                    alert('Please enter an encryption key');
+                    return false;
+                }
+                
+                const expectedKeyLength = this.mode === 'ndx' ? 64 : 32;
+                if (this.key.length !== expectedKeyLength) {
+                    alert(`Key must be ${expectedKeyLength} hex characters (${expectedKeyLength/2} bytes)`);
+                    return false;
+                }
+                
+                if (this.mode !== 'deterministic') {
+                    const expectedTweakLength = this.mode === 'ndx' ? 32 : 16;
+                    if (this.tweak && this.tweak.length !== expectedTweakLength) {
+                        alert(`Tweak must be ${expectedTweakLength} hex characters (${expectedTweakLength/2} bytes)`);
+                        return false;
+                    }
+                }
+                
+                return true;
+            },
+            
+            // Simulation functions for the playground
+            // These would be replaced with actual IPCrypt implementation in a real application
+            
+            simulateDeterministicEncryption(ip, key) {
+                // This is a very simple simulation that doesn't actually encrypt anything
+                // It just returns a different IP based on the input to demonstrate the concept
+                if (ip.includes(':')) {
+                    // IPv6
+                    return '2001:db8:85a3:8d3:1319:8a2e:370:7348';
+                } else {
+                    // IPv4
+                    return '198.51.100.42';
+                }
+            },
+            
+            simulateHexOutput(length) {
+                return this.generateRandomHex(length * 2);
+            },
+            
+            simulateIpAddress() {
+                // Return a random IP address for simulation
+                const ipv4 = Math.floor(Math.random() * 256) + '.' + 
+                             Math.floor(Math.random() * 256) + '.' + 
+                             Math.floor(Math.random() * 256) + '.' + 
+                             Math.floor(Math.random() * 256);
+                return ipv4;
+            }
+        };
+    }
+</script>

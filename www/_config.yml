@@ -1,0 +1,106 @@
+# Jekyll Configuration for IPCrypt Website - GitHub Pages Compatible
+
+# Site settings
+title: IPCrypt
+description: >-
+  Methods for IP Address Encryption and Obfuscation -
+  A standardized approach to encrypting and obfuscating IP addresses
+  for privacy preservation and operational use.
+baseurl: "/draft-denis-ipcrypt" # the subpath of your site, e.g. /blog
+url: "https://jedisct1.github.io" # the base hostname & protocol for your site
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Theme settings - Using custom theme
+# theme: minima
+
+# Plugins - GitHub Pages compatible
+# Only use plugins that are supported by GitHub Pages
+# See: https://pages.github.com/versions/
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Collections
+collections:
+  implementations:
+    output: true
+    permalink: /:collection/:path/
+  examples:
+    output: true
+    permalink: /:collection/:path/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "implementations"
+    values:
+      layout: "implementation"
+  - scope:
+      path: ""
+      type: "examples"
+    values:
+      layout: "example"
+  - scope:
+      path: "pages"
+    values:
+      layout: "page"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+  - .git
+  - .github
+  - README.md
+  - NOTES.md
+  - TODO.md
+  - package.json
+  - package-lock.json
+  - yarn.lock
+
+# Include specific files/folders
+include:
+  - .nojekyll
+
+# Custom variables
+github_repo: https://github.com/jedisct1/draft-denis-ipcrypt
+ietf_datatracker: https://datatracker.ietf.org/doc/draft-denis-ipcrypt
+editors_copy: https://jedisct1.github.io/draft-denis-ipcrypt/#go.draft-denis-ipcrypt.html
+
+# Navigation
+navigation:
+  - title: Home
+    url: /
+  - title: About
+    url: /about/
+  - title: Specification
+    url: /spec/
+  - title: Implementations
+    url: /implementations/
+  - title: Playground
+    url: /playground/
+  - title: Developer Resources
+    url: /resources/
+  - title: Community
+    url: /community/
+
+# Social links
+social_links:
+  github: jedisct1/draft-denis-ipcrypt
+
+# Analytics (uncomment and add your analytics ID when ready)
+# google_analytics: UA-XXXXXXXX-X

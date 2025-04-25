@@ -1,0 +1,159 @@
+---
+layout: default
+---
+<div class="container mx-auto px-4 py-8">
+  <div class="max-w-4xl mx-auto">
+    <header class="example-header mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold text-primary mb-4">{{ page.title }}</h1>
+      {% if page.description %}
+      <p class="text-lg text-gray-600">{{ page.description }}</p>
+      {% endif %}
+            
+            {% if page.modes %}
+      <div class="example-modes mt-4">
+        <span class="text-sm font-medium text-gray-500 mr-2">Available modes:</span>
+        <div class="flex flex-wrap gap-2">
+          {% for mode in page.modes %}
+          <span class="px-3 py-1 bg-gray-100 rounded-full text-sm font-medium">{{ mode }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </header>
+    <div class="example-content prose prose-lg max-w-none mb-8">
+      {{ content }}
+    </div>
+    <div class="example-interactive p-6 border rounded-lg bg-gray-50" x-data="ipcryptExample()">
+      <h2 class="text-xl font-bold mb-4">Interactive Example</h2>
+      <div class="mb-6">
+        <label for="mode-select" class="block text-sm font-medium text-gray-700 mb-1">Encryption Mode</label>
+        <select id="mode-select" x-model="mode" class="w-full p-2 border rounded">
+          <option value="deterministic">ipcrypt-deterministic</option>
+          <option value="nd">ipcrypt-nd</option>
+          <option value="ndx">ipcrypt-ndx</option>
+        </select>
+      </div>
+      <div class="mb-6">
+        <label for="ip-input" class="block text-sm font-medium text-gray-700 mb-1">IP Address</label>
+        <input type="text" id="ip-input" x-model="ipAddress" placeholder="Enter an IP address (e.g., 192.0.2.1)" class="w-full p-2 border rounded">
+        <p class="mt-1 text-sm text-gray-500">Supports both IPv4 and IPv6 addresses</p>
+      </div>
+      <div class="mb-6">
+        <label for="key-input" class="block text-sm font-medium text-gray-700 mb-1">Encryption Key (Hex)</label>
+        <input type="text" id="key-input" x-model="key" placeholder="Enter a hex key" class="w-full p-2 border rounded">
+        <p class="mt-1 text-sm text-gray-500" x-text="keyHelperText"></p>
+      </div>
+      <template x-if="mode !== 'deterministic'">
+        <div class="mb-6">
+          <label for="tweak-input" class="block text-sm font-medium text-gray-700 mb-1">Tweak (Hex)</label>
+          <div class="flex gap-2">
+            <input type="text" id="tweak-input" x-model="tweak" placeholder="Enter a hex tweak (or leave empty to generate)" class="flex-grow p-2 border rounded">
+            <button @click="generateRandomTweak" class="px-4 py-2 bg-primary text-white rounded hover:bg-primary-dark">
+              Generate
+            </button>
+          </div>
+          <p class="mt-1 text-sm text-gray-500" x-text="tweakHelperText"></p>
+        </div>
+      </template>
+      <div class="flex justify-end">
+        <button @click="encrypt" class="px-6 py-2 bg-primary text-white rounded hover:bg-primary-dark">
+          Encrypt
+        </button>
+      </div>
+      <template x-if="result">
+        <div class="mt-8 p-4 border rounded bg-white">
+          <h3 class="text-lg font-semibold mb-2">Result</h3>
+          <div class="mb-4">
+            <div class="text-sm font-medium text-gray-500 mb-1">Encrypted Output:</div>
+            <div class="p-3 bg-gray-100 rounded font-mono break-all" x-text="result.output"></div>
+          </div>
+          <template x-if="mode !== 'deterministic'">
+            <div class="mb-4">
+              <div class="text-sm font-medium text-gray-500 mb-1">Tweak Used:</div>
+              <div class="p-3 bg-gray-100 rounded font-mono break-all" x-text="result.tweak"></div>
+            </div>
+          </template>
+          <div>
+            <div class="text-sm font-medium text-gray-500 mb-1">Hex Representation:</div>
+            <div class="p-3 bg-gray-100 rounded font-mono break-all" x-text="result.hex"></div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>
+<script>
+  function ipcryptExample() {
+        return {
+            mode: 'deterministic',
+            ipAddress: '',
+            key: '',
+            tweak: '',
+            result: null,
+            
+            get keyHelperText() {
+                if (this.mode === 'deterministic' || this.mode === 'nd') {
+                    return 'Required: 16 bytes (32 hex characters)';
+                } else if (this.mode === 'ndx') {
+                    return 'Required: 32 bytes (64 hex characters) - two AES-128 keys';
+                }
+                return '';
+            },
+            
+            get tweakHelperText() {
+                if (this.mode === 'nd') {
+                    return 'Required: 8 bytes (16 hex characters)';
+                } else if (this.mode === 'ndx') {
+                    return 'Required: 16 bytes (32 hex characters)';
+                }
+                return '';
+            },
+            
+            generateRandomTweak() {
+                const length = this.mode === 'nd' ? 16 : 32; // Hex characters (8 or 16 bytes)
+                let result = '';
+                const characters = '0123456789abcdef';
+                for (let i = 0; i < length; i++) {
+                    result += characters.charAt(Math.floor(Math.random() * characters.length));
+                }
+                this.tweak = result;
+            },
+            
+            encrypt() {
+                // This is a placeholder for the actual encryption logic
+                // In a real implementation, this would call the appropriate IPCrypt function
+                
+                // Validate inputs
+                if (!this.ipAddress) {
+                    alert('Please enter an IP address');
+                    return;
+                }
+                
+                if (!this.key) {
+                    alert('Please enter an encryption key');
+                    return;
+                }
+                
+                if (this.mode !== 'deterministic' && !this.tweak) {
+                    this.generateRandomTweak();
+                }
+                
+                // Simulate encryption result
+                // In a real implementation, this would be the actual encrypted output
+                this.result = {
+                    output: this.mode === 'deterministic' 
+                        ? '2001:db8::ff:fe00:1' 
+                        : (this.mode === 'nd' 
+                            ? '08e0c289bff23b7cb349aadfe3bcef56221c384c7c217b16'
+                            : '21bd1834bc088cd2b4ecbe30b70898d782db0d4125fdace61db35b8339f20ee5'),
+                    tweak: this.tweak,
+                    hex: this.mode === 'deterministic'
+                        ? '20010db8000000000000ffff0000fe0001'
+                        : (this.mode === 'nd'
+                            ? '08e0c289bff23b7cb349aadfe3bcef56221c384c7c217b16'
+                            : '21bd1834bc088cd2b4ecbe30b70898d782db0d4125fdace61db35b8339f20ee5')
+                };
+            }
+        };
+    }
+</script>
