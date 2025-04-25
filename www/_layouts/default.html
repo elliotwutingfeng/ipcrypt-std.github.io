@@ -3,19 +3,28 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="IPCrypt">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}IPCrypt, IP address encryption, IP obfuscation, privacy, security, network security, data protection{% endif %}">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
     <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
     <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/assets/images/og-image.png">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="en_US">
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
     <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <meta name="twitter:image" content="{{ site.url }}{{ site.baseurl }}/assets/images/twitter-card.png">
+    <meta name="twitter:site" content="@ipcrypt">
     <!-- Favicon -->
     <link rel="icon" href="{{ site.baseurl }}/assets/images/favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/assets/images/favicon-32x32.png">
@@ -34,6 +43,32 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', '{{ site.google_analytics }}');
+    </script>
+    {% endif %}
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+      {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}{{ site.baseurl }}/",
+      "description": "{{ site.description }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://github.com/ipcrypt-std/ipcrypt-std.github.io/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    {% if page.layout == 'page' %}
+    <script type="application/ld+json">
+      {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "{{ page.title }}",
+      "description": "{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}",
+      "url": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
+    }
     </script>
     {% endif %}
   </head>
