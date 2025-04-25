@@ -66,7 +66,7 @@ This document outlines planned improvements and future tasks for the IPCrypt web
 ### Design Enhancements
 
 - [ ] Add subtle background patterns or textures
-- [ ] Create custom illustrations for key concepts
+- [x] Create custom illustrations for key concepts
 - [ ] Implement advanced animations for interactive elements
 - [ ] Design custom badges for implementation languages
 - [ ] Create a style guide for consistent design
