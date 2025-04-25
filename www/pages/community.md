@@ -85,7 +85,7 @@ The primary platform for collaboration is GitHub:
 
 ### IETF
 
-IPCrypt is developed as an IETF Internet-Draft:
+IPCrypt development resources:
 
 - [IETF Datatracker]({{ site.ietf_datatracker }}): Official IETF page for the draft
 - [IETF Mailing Lists](https://www.ietf.org/how/lists/): Relevant IETF mailing lists for discussion
