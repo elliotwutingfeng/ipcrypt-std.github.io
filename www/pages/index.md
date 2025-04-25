@@ -14,6 +14,7 @@ permalink: /
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ site.baseurl }}/about/" class="btn btn-primary">Learn More</a>
             <a href="https://jedisct1.github.io/draft-denis-ipcrypt/draft-denis-ipcrypt.html" class="btn btn-secondary" target="_blank" rel="noopener">Read the Specification</a>
+            <a href="{{ site.baseurl }}/playground/" class="btn btn-accent">Try the Playground</a>
         </div>
     </div>
 </section>
