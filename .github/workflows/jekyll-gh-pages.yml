@@ -29,12 +29,13 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
+          bundler-cache: false
           working-directory: www
       
       - name: Build with Jekyll
         run: |
           cd www
+          gem install bundler -v "~> 2.4"
           bundle install
           bundle exec jekyll build
         env:
