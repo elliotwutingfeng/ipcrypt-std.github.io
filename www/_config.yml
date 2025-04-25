@@ -7,7 +7,7 @@ description: >-
   A standardized approach to encrypting and obfuscating IP addresses
   for privacy preservation and operational use.
 baseurl: "" # empty for root URL
-url: "https://ipcrypt.stdc.org" # the base hostname & protocol for your site
+url: "https://ipcrypt-std.github.io" # the base hostname & protocol for your site
 
 # Build settings
 markdown: kramdown
