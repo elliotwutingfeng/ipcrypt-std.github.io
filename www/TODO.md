@@ -22,10 +22,10 @@ This document outlines planned improvements and future tasks for the IPCrypt web
 ### Technical Implementation
 
 - [ ] Add syntax highlighting for code examples
-- [ ] Implement proper meta tags for better SEO
-- [ ] Create a sitemap.xml file
-- [ ] Add schema.org markup for better search results
-- [ ] Implement proper 404 page
+- [x] Implement proper meta tags for better SEO
+- [x] Create a sitemap.xml file
+- [x] Add schema.org markup for better search results
+- [x] Implement proper 404 page
 
 ## Medium Priority Tasks
 
