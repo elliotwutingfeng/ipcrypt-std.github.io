@@ -90,7 +90,7 @@ permalink: /
         <h2 class="text-3xl font-bold mb-6 text-center">Pragmatic Standardization</h2>
         <div class="max-w-3xl mx-auto">
             <p class="text-lg mb-6">
-                IPCrypt serves as a <strong>standardized solution</strong> that prioritizes reliability and ease of adoption over unnecessary complexity. By providing clear guidance and interoperability, IPCrypt enables organizations to implement secure IP address encryption with confidence.
+                IPCrypt serves as a <strong>proposed solution</strong> that prioritizes reliability and ease of adoption over unnecessary complexity. By providing clear guidance and interoperability, IPCrypt enables organizations to implement secure IP address encryption with confidence.
             </p>
             <p class="text-lg mb-6">
                 Rather than reinventing the wheel, IPCrypt leverages well-established cryptographic primitives and provides a consistent framework that can be implemented across diverse environments and programming languages.

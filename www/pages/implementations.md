@@ -9,7 +9,7 @@ permalink: /implementations/
 
 IPCrypt has been implemented in multiple programming languages to ensure broad accessibility and ease of integration across different platforms and environments. Each implementation follows the specification and provides the same cryptographic guarantees.
 
-## Standardized Implementation Approach
+## Consistent Implementation Approach
 
 IPCrypt's elegant simplicity is reflected in its implementations. By relying exclusively on established cryptographic standards, IPCrypt ensures:
 
@@ -133,7 +133,7 @@ All implementations provide the following features:
 
 ## Choosing an Implementation
 
-Thanks to IPCrypt's standardized approach, all implementations provide identical cryptographic guarantees and functionality. This means you can choose an implementation based primarily on practical considerations rather than security differences:
+Thanks to IPCrypt's consistent approach, all implementations provide identical cryptographic guarantees and functionality. This means you can choose an implementation based primarily on practical considerations rather than security differences:
 
 1. **Language Compatibility**: Choose an implementation that integrates well with your existing codebase
 2. **Performance Requirements**: Some implementations (like C and Rust) may offer better performance
