@@ -246,7 +246,7 @@ Compared to approaches like simple hashing, truncation, or tokenization, IPCrypt
 
 #### What programming languages can I find IPCrypt in?
 
-Thanks to community contributors, IPCrypt has been implemented in several programming languages, including:
+IPCrypt has been implemented in several programming languages, including:
 - Python
 - C
 - Rust
@@ -303,4 +303,4 @@ If you have questions about IPCrypt:
 
 1. **GitHub Issues**: You can post questions on the [GitHub repository]({{ site.github_repo }}/issues)
 2. **Join In**: Feel free to share your experiences or suggestions
-3. **Reach Out**: The volunteer contributors might be able to help with specific questions
+3. **Reach Out**: The contributors might be able to help with specific questions

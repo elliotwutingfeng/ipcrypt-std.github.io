@@ -9,7 +9,7 @@ permalink: /
     <div class="container mx-auto px-4 py-12 text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-6">A Community Approach to IP Address Encryption</h1>
         <p class="text-xl max-w-3xl mx-auto mb-8">
-            IPCrypt is a free, open specification created by volunteers to help encrypt and obfuscate IP addresses, balancing privacy considerations with practical network operations.
+            IPCrypt is a free, open specification for encrypting and obfuscating IP addresses, balancing privacy considerations with practical network operations.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ site.baseurl }}/about/" class="btn btn-primary">Learn More</a>
@@ -90,7 +90,7 @@ permalink: /
         <h2 class="text-3xl font-bold mb-6 text-center">A Community Approach</h2>
         <div class="max-w-3xl mx-auto">
             <p class="text-lg mb-6">
-                IPCrypt is a <strong>volunteer-created specification</strong> that tries to be practical and easy to implement. We've focused on clarity and simplicity so that anyone can understand and use it, regardless of their resources or expertise.
+                IPCrypt is an <strong>open specification</strong> that tries to be practical and easy to implement. We've focused on clarity and simplicity so that anyone can understand and use it, regardless of their resources or expertise.
             </p>
             <p class="text-lg mb-6">
                 We've built on existing, well-tested cryptographic methods rather than creating new ones. Our goal is to provide a helpful resource that can be freely implemented in any programming language or environment.
@@ -149,7 +149,7 @@ permalink: /
                     <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
                         <h3 class="text-xl font-bold mb-3">Freely Available in Several Programming Languages</h3>
                         <p class="mb-4">
-                            Thanks to community contributors, IPCrypt has been implemented in Python, C, Rust, JavaScript, Go, Zig, PHP, D, and more, making it accessible to developers across different platforms.
+                            IPCrypt has been implemented in Python, C, Rust, JavaScript, Go, Zig, PHP, D, and more, making it accessible to developers across different platforms.
                         </p>
                         <p class="mb-6">
                             Each implementation is open source and follows the same specification, allowing developers to choose the language that best fits their project.

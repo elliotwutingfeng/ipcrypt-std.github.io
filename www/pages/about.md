@@ -7,9 +7,9 @@ permalink: /about/
 
 ## What is IPCrypt?
 
-IPCrypt is a simple, open specification that suggests methods for encrypting and obfuscating IP addresses. Created by volunteers, it offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
+IPCrypt is a simple, open specification that suggests methods for encrypting and obfuscating IP addresses. It offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
 
-This community-driven effort was inspired by privacy concerns highlighted in [RFC6973](https://datatracker.ietf.org/doc/html/rfc6973) and [RFC7258](https://datatracker.ietf.org/doc/html/rfc7258) about pervasive monitoring and data collection. We aimed to help maintain the practical utility of IP addresses in network operations while addressing these privacy considerations.
+This community effort was inspired by privacy concerns highlighted in [RFC6973](https://datatracker.ietf.org/doc/html/rfc6973) and [RFC7258](https://datatracker.ietf.org/doc/html/rfc7258) about pervasive monitoring and data collection. We aimed to help maintain the practical utility of IP addresses in network operations while addressing these privacy considerations.
 
 ## The Challenge We're Trying to Help With
 
