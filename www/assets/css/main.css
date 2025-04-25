@@ -500,6 +500,25 @@ p {
     margin-top: 0.25rem;
 }
 
+/* Encryption Diagrams */
+.diagram-container {
+    margin: 2rem 0;
+    overflow-x: auto;
+}
+
+.encryption-diagram {
+    font-family: var(--font-mono);
+    line-height: 1.2;
+    white-space: pre;
+    background-color: #f8f9fa;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    color: #1e293b;
+    overflow-x: auto;
+    font-size: 0.9rem;
+}
+
 .max-w-4xl {
     max-width: 56rem;
 }

@@ -212,6 +212,7 @@ When implementing IPCrypt, be aware of these security considerations:
 
 ### Documentation
 
+- [Encryption Modes]({{ site.baseurl }}/encryption-modes/): Detailed explanations of IPCrypt's encryption modes
 - [FAQ]({{ site.baseurl }}/faq/): Answers to frequently asked questions about IPCrypt
 - [Glossary]({{ site.baseurl }}/glossary/): Definitions of technical terms related to IPCrypt
 - [Code Examples]({{ site.baseurl }}/code-examples/): Sample code in various programming languages
