@@ -28,13 +28,16 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.6'
-          bundler-cache: true
+          ruby-version: '3.3'
+          bundler-cache: false
           working-directory: www
       
       - name: Build with Jekyll
         run: |
           cd www
+          gem update --system
+          gem install bundler
+          bundle update --bundler
           bundle install
           bundle exec jekyll build
         env:
