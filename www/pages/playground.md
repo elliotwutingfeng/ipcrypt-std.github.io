@@ -58,7 +58,7 @@ permalink: /playground/
         <h2 class="text-2xl font-bold mb-4">About This Playground</h2>
         
         <p class="mb-4">
-            This playground uses the <a href="https://www.npmjs.com/package/ipcrypt" target="_blank" rel="noopener">ipcrypt-js</a> implementation to perform encryption and decryption operations directly in your browser.
+            This playground uses the <a href="https://www.npmjs.com/package/ipcrypt" target="_blank" rel="noopener">ipcrypt</a> implementation to perform encryption and decryption operations directly in your browser.
         </p>
         
         <h3 class="text-xl font-bold mb-2">Encryption Modes</h3>

@@ -63,7 +63,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
         <h3 class="text-xl font-bold">JavaScript</h3>
         <p>Browser and Node.js compatible implementation.</p>
         <p class="mt-4">
-            <a href="https://github.com/jedisct1/draft-denis-ipcrypt/tree/main/implementations/javascript" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/jedisct1/ipcrypt-js" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
             <a href="https://www.npmjs.com/package/ipcrypt" class="btn btn-secondary btn-sm" target="_blank" rel="noopener">npm</a>
         </p>
     </div>
