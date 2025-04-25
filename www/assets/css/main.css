@@ -843,6 +843,151 @@ code {
     z-index: 1;
 }
 
+/* Print Styles */
+@media print {
+
+    /* General print styles */
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        background: #fff;
+        color: #000;
+    }
+
+    /* Hide non-essential elements */
+    .site-header,
+    .site-footer,
+    #mobile-menu,
+    #mobile-menu-button,
+    button {
+        display: none !important;
+    }
+
+    /* Ensure content takes full width */
+    .container,
+    main,
+    .content {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Improve link display */
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 90%;
+        font-style: italic;
+    }
+
+    /* Improve table display */
+    table,
+    th,
+    td {
+        border: 1px solid #ddd !important;
+    }
+
+    table {
+        page-break-inside: avoid;
+        width: 100% !important;
+        border-collapse: collapse;
+    }
+
+    th {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+    }
+
+    /* Ensure code blocks print well */
+    pre,
+    code {
+        background-color: #f8f8f8 !important;
+        border: 1px solid #ddd !important;
+        font-size: 11pt;
+        page-break-inside: avoid;
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+    }
+
+    /* Ensure diagrams print well */
+    .diagram-container {
+        page-break-inside: avoid;
+        max-width: 100% !important;
+        overflow: visible !important;
+    }
+
+    .encryption-diagram {
+        border: 1px solid #000 !important;
+        background-color: #fff !important;
+        color: #000 !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        white-space: pre-wrap !important;
+    }
+
+    /* Improve card display */
+    .mode-card {
+        page-break-inside: avoid;
+        border: 1px solid #000 !important;
+        margin-bottom: 20pt !important;
+        padding: 10pt !important;
+        background-color: #fff !important;
+    }
+
+    /* Add page breaks before major sections */
+    h1,
+    h2 {
+        page-break-before: always;
+        page-break-after: avoid;
+    }
+
+    h1:first-of-type {
+        page-break-before: avoid;
+    }
+
+    h3,
+    h4,
+    h5,
+    h6 {
+        page-break-after: avoid;
+    }
+
+    /* Avoid breaking inside paragraphs and lists */
+    p,
+    ul,
+    ol,
+    dl,
+    pre,
+    blockquote,
+    table,
+    figure {
+        page-break-inside: avoid;
+    }
+
+    /* Add URL to the top of the first page */
+    @page: first {
+        margin-top: 3cm;
+    }
+
+    body:before {
+        content: "IPCrypt Documentation - https://ipcrypt-std.github.io/";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 14pt;
+        font-weight: bold;
+        padding: 10pt 0;
+        border-bottom: 1pt solid #000;
+    }
+}
+
 .hero h1 {
     color: white;
     font-size: 2.5rem;
