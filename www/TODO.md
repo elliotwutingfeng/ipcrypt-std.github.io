@@ -40,7 +40,7 @@ This document outlines planned improvements and future tasks for the IPCrypt web
 ### Design Refinements
 
 - [x] Improve card hover effects for better interactivity
-- [x] Add subtle animations for page transitions
+- [ ] Add subtle animations for page transitions (removed as per user feedback)
 - [x] Create custom icons for features and benefits
 - [x] Enhance the color scheme with more accent colors
 - [x] Improve typography with better font pairings
