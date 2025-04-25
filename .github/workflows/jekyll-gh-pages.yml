@@ -28,18 +28,15 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
-          bundler-cache: false
+          ruby-version: '2.6'
+          bundler-cache: true
           working-directory: www
       
       - name: Build with Jekyll
         run: |
           cd www
-          gem install bundler -v "~> 2.6"
-          # Use the full path to the new bundler to avoid using the pre-installed one
-          $(which bundle) --version
-          $(which bundle) install
-          $(which bundle) exec jekyll build
+          bundle install
+          bundle exec jekyll build
         env:
           JEKYLL_ENV: production
       
