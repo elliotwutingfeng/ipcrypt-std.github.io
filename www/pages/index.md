@@ -7,7 +7,7 @@ permalink: /
 
 <section class="hero">
     <div class="container mx-auto px-4 py-12 text-center">
-        <h1 class="text-4xl md:text-5xl font-bold mb-6">A Community Approach to IP Address Encryption</h1>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">A Common Approach to IP Address Encryption</h1>
         <p class="text-xl max-w-3xl mx-auto mb-8">
             IPCrypt is a free, open specification for encrypting and obfuscating IP addresses, balancing privacy considerations with practical network operations.
         </p>
@@ -88,7 +88,7 @@ permalink: /
 
 <section class="py-12 bg-white">
     <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-6 text-center">A Community Approach</h2>
+        <h2 class="text-3xl font-bold mb-6 text-center">A Common Approach</h2>
         <div class="max-w-3xl mx-auto">
             <p class="text-lg mb-6">
                 IPCrypt is an <strong>open specification</strong> that tries to be practical and easy to implement. We've focused on clarity and simplicity so that anyone can understand and use it, regardless of their resources or expertise.
