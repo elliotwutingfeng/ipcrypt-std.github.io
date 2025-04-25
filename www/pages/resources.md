@@ -31,16 +31,6 @@ If you'd like to try IPCrypt:
 
 ## Implementation Information
 
-### Understanding the Different Modes
-
-IPCrypt suggests three different approaches, each with its own characteristics:
-
-| Mode                    | Format Preservation | Correlation Protection | Output Size | Potential Use Case                                                |
-| ----------------------- | ------------------- | ---------------------- | ----------- | ----------------------------------------------------------------- |
-| `ipcrypt-deterministic` | Yes                 | No                     | 16 bytes    | When you need to keep the IP address format and correlation is ok |
-| `ipcrypt-nd`            | No                  | Yes                    | 24 bytes    | When you want to prevent correlation with moderate security       |
-| `ipcrypt-ndx`           | No                  | Yes                    | 32 bytes    | When you want the highest security level                          |
-
 ### Key Management Suggestions
 
 Good key management practices are important when using IPCrypt:
@@ -216,91 +206,15 @@ When using IPCrypt, here are some security considerations to keep in mind:
 - [Code Examples]({{ site.baseurl }}/code-examples/): Example code snippets in various languages
 - [Community]({{ site.baseurl }}/community/): How to get involved or contribute
 
-## Common Questions
 
-### General Questions
-
-#### What is IPCrypt?
-
-IPCrypt is a simple, open specification that suggests methods for encrypting and obfuscating IP addresses. It offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
-
-#### Why was IPCrypt created?
-
-IPCrypt was inspired by privacy concerns mentioned in [RFC6973](https://datatracker.ietf.org/doc/html/rfc6973) and [RFC7258](https://datatracker.ietf.org/doc/html/rfc7258) about monitoring and data collection. We wanted to help balance privacy considerations with practical network operations.
-
-#### Is IPCrypt a standard?
-
-IPCrypt is currently just a proposed idea, not an official standard. It's being developed as an IETF Internet-Draft to suggest a consistent approach to IP address encryption.
-
-#### How is IPCrypt different from other ways of anonymizing IP addresses?
-
-Compared to approaches like simple hashing, truncation, or tokenization, IPCrypt tries to offer:
-- Methods based on established cryptographic techniques
-- A consistent approach that works across different systems
-- The option to preserve IP address format when needed
-- Protection against correlation through non-deterministic modes
-- The ability to decrypt when necessary
-- Clear documentation
-
-### Implementation Questions
-
-#### What programming languages can I find IPCrypt in?
-
-IPCrypt has been implemented in several programming languages, including:
-- Python
-- C
-- Rust
-- JavaScript
-- Go
-- Zig
-- PHP
-- D
-
-#### Do the different implementations work together?
-
-Yes, the different implementations should produce the same results when given the same inputs. This means you can use different programming languages and still get consistent results.
-
-#### How can I create a key for IPCrypt?
-
-It's a good idea to use a cryptographically secure random number generator to create a 16-byte key. Here's a simple example:
-
-```python
-import os
-key = os.urandom(16)
-```
-
-Try to avoid using predictable or hardcoded keys in real applications.
-
-### Questions About When to Use IPCrypt
-
-#### When might the deterministic mode be helpful?
-
-The deterministic mode might be useful when:
-- You want to keep the IP address format
-- You need to look up or join data using the encrypted addresses
-- It's okay if the same IP always encrypts to the same result
-
-#### When might the non-deterministic modes be helpful?
-
-The non-deterministic modes might be useful when:
-- You don't need to preserve the IP address format
-- You want to prevent linking data across different datasets
-- Privacy protection is especially important
-
-#### Could IPCrypt help with GDPR?
-
-IPCrypt might be helpful as part of a GDPR approach by converting IP addresses to a pseudonymized form. However, encryption by itself might not be enough for full compliance, so it's a good idea to check with legal experts about your specific needs.
-
-### Related Reading
-
-- [RFC6973: Privacy Considerations for Internet Protocols](https://datatracker.ietf.org/doc/html/rfc6973)
-- [RFC7258: Pervasive Monitoring Is an Attack](https://datatracker.ietf.org/doc/html/rfc7258)
-- [RFC4291: IP Version 6 Addressing Architecture](https://datatracker.ietf.org/doc/html/rfc4291)
-
-### Getting Help
+## Getting Help
 
 If you have questions about IPCrypt:
 
 1. **GitHub Issues**: You can post questions on the [GitHub repository]({{ site.github_repo }}/issues)
 2. **Join In**: Feel free to share your experiences or suggestions
-3. **Reach Out**: The contributors might be able to help with specific questions
+
+### Related RFCs
+
+- [RFC6973: Privacy Considerations for Internet Protocols](https://datatracker.ietf.org/doc/html/rfc6973)
+- [RFC7258: Pervasive Monitoring Is an Attack](https://datatracker.ietf.org/doc/html/rfc7258)
