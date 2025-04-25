@@ -14,7 +14,7 @@ This document outlines planned improvements and future tasks for the IPCrypt web
 
 ### Design Improvements
 
-- [ ] Create a proper favicon and apple-touch-icon
+- [x] Create a proper favicon and apple-touch-icon
 - [ ] Add more visual elements to explain encryption modes
 - [ ] Improve mobile navigation for smaller screens
 - [ ] Enhance print styles for better documentation printing
