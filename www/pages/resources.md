@@ -208,7 +208,14 @@ When implementing IPCrypt, be aware of these security considerations:
 ### Tools
 
 - [IPCrypt Test Vector Generator](https://github.com/jedisct1/draft-denis-ipcrypt/tree/main/implementations/python/generate_test_vectors.py): Generate test vectors for verification
-- [IPCrypt Playground]({{ site.baseurl }}/examples/playground/): Interactive web tool to experiment with IPCrypt
+- [IPCrypt Playground]({{ site.baseurl }}/playground/): Interactive web tool to experiment with IPCrypt
+
+### Documentation
+
+- [FAQ]({{ site.baseurl }}/faq/): Answers to frequently asked questions about IPCrypt
+- [Glossary]({{ site.baseurl }}/glossary/): Definitions of technical terms related to IPCrypt
+- [Code Examples]({{ site.baseurl }}/code-examples/): Sample code in various programming languages
+- [Community]({{ site.baseurl }}/community/): Information about contributing to IPCrypt
 
 ### References
 
@@ -222,4 +229,4 @@ If you need help implementing or using IPCrypt:
 
 1. **GitHub Issues**: Post questions or issues on the [GitHub repository]({{ site.github_repo }}/issues)
 2. **Contribute**: Share your experiences and improvements with the community
-3. **Contact**: Reach out to the author or contributors for specific questions
+3. **Contact**: Reach out to the contributors for specific questions

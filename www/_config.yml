@@ -95,14 +95,8 @@ navigation:
     url: /playground/
   - title: Code Examples
     url: /code-examples/
-  - title: FAQ
-    url: /faq/
-  - title: Glossary
-    url: /glossary/
-  - title: Developer Resources
+  - title: Resources
     url: /resources/
-  - title: Community
-    url: /community/
 
 # Social links
 social_links:
