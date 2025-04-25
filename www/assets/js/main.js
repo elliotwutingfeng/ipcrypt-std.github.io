@@ -1,5 +1,8 @@
 // IPCrypt Website JavaScript
 
+// Add js-enabled class to body as soon as possible
+document.documentElement.classList.add('js-enabled');
+
 document.addEventListener('DOMContentLoaded', function () {
     // Handle implementation card clicks
     const implementationCards = document.querySelectorAll('.implementation-card');
