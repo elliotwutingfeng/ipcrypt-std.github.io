@@ -79,39 +79,7 @@
     color: var(--color-primary-dark);
 }
 
-/* 2. Subtle Page Transitions */
-.page-transition {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Apply page transition to main content */
-main {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Section transitions - only apply when JS is available */
-.js-enabled section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.js-enabled section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* Transition effects removed as per user feedback */
 
 /* 3. Enhanced Color Scheme with Accent Colors */
 :root {
