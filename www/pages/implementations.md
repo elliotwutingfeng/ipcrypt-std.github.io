@@ -1,7 +1,7 @@
 ---
 layout: page
 title: IPCrypt Implementations
-description: Explore the various implementations of IPCrypt across different programming languages, including Python, C, Rust, JavaScript, Go, Zig, PHP, and D.
+description: Explore the various implementations of IPCrypt across different programming languages, including Python, C, Rust, JavaScript, Go, Dart, Zig, PHP, and D.
 permalink: /implementations/
 ---
 
@@ -62,6 +62,20 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
         <p>Concurrent-friendly implementation for Go applications.</p>
         <p class="mt-4">
             <a href="https://github.com/jedisct1/go-ipcrypt" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+        </p>
+    </div>
+    
+    <div class="implementation-card">
+        <span class="language-badge">Dart</span>
+        <h3 class="text-xl font-bold">Dart</h3>
+        <p>Native implementation for Dart and Flutter applications.</p>
+        <p class="text-sm text-gray-600 mt-2">
+            <span class="text-primary">✓</span> Detailed documentation available
+        </p>
+        <p class="mt-4">
+            <a href="{{ site.baseurl }}/implementations/dart/" class="btn btn-primary btn-sm">Documentation</a>
+            <a href="https://github.com/elliotwutingfeng/ipcrypt" class="btn btn-secondary btn-sm" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://pub.dev/packages/ipcrypt" class="btn btn-secondary btn-sm" target="_blank" rel="noopener">pub.dev</a>
         </p>
     </div>
     
@@ -152,6 +166,16 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
             </tr>
             <tr>
                 <td class="py-2 px-4 border">Go</td>
+                <td class="py-2 px-4 border">Native</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border">ISC</td>
+            </tr>
+            <tr>
+                <td class="py-2 px-4 border">Dart</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
