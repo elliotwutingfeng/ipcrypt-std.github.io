@@ -16,13 +16,19 @@ examples:
       void main() {
         // 16-byte key as hex string
         String key = '2b7e151628aed2a6abf7158809cf4f3c';
-        
-        // Encrypt an IPv4 address
-        String encryptedIp = ipCryptDeterministic.encrypt('192.0.2.1', key);
+
+        // Encrypt an IP address
+        String encryptedIp = ipCryptDeterministic.encrypt(
+          '192.0.2.1',
+          hexStringToBytes(key),
+        );
         print('Encrypted IP: $encryptedIp');
-        
+
         // Decrypt back to the original
-        String decryptedIp = ipCryptDeterministic.decrypt(encryptedIp, key);
+        String decryptedIp = ipCryptDeterministic.decrypt(
+          encryptedIp,
+          hexStringToBytes(key),
+        );
         print('Decrypted IP: $decryptedIp');
       }
   - title: Non-Deterministic Encryption
@@ -34,16 +40,34 @@ examples:
       void main() {
         // 16-byte key as hex string
         String key = '2b7e151628aed2a6abf7158809cf4f3c';
-        
+
         // 8-byte tweak for randomization
-        Uint8List tweak = Uint8List.fromList([0x08, 0xe0, 0xc2, 0x89, 0xbf, 0xf2, 0x3b, 0x7c]);
-        
-        // Encrypt an IPv4 address
-        Uint8List encryptedData = ipCryptNonDeterministic.encrypt('192.0.2.1', key, tweak);
-        print('Encrypted data: ${encryptedData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}');
-        
+        Uint8List tweak = Uint8List.fromList([
+          0x08,
+          0xe0,
+          0xc2,
+          0x89,
+          0xbf,
+          0xf2,
+          0x3b,
+          0x7c,
+        ]);
+
+        // Encrypt an IP address
+        Uint8List encryptedData = ipCryptNonDeterministic.encrypt(
+          '192.0.2.1',
+          hexStringToBytes(key),
+          tweak,
+        );
+        print(
+          'Encrypted data: ${encryptedData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}',
+        );
+
         // Decrypt back to the original
-        String decryptedIp = ipCryptNonDeterministic.decrypt(encryptedData, key);
+        String decryptedIp = ipCryptNonDeterministic.decrypt(
+          encryptedData,
+          hexStringToBytes(key),
+        );
         print('Decrypted IP: $decryptedIp');
       }
   - title: Extended Non-Deterministic Encryption
@@ -54,17 +78,44 @@ examples:
 
       void main() {
         // 32-byte key as hex string (two 16-byte keys)
-        String key = '2b7e151628aed2a6abf7158809cf4f3c1032547698badcfeefcdab8967452301';
-        
+        String key =
+            '2b7e151628aed2a6abf7158809cf4f3c1032547698badcfeefcdab8967452301';
+
         // 16-byte tweak for enhanced randomization
-        Uint8List tweak = Uint8List.fromList([0x21, 0xbd, 0x18, 0x34, 0xbc, 0x08, 0x8c, 0xd2, 0xb4, 0xec, 0xbe, 0x30, 0xb7, 0x08, 0x98, 0xd7]);
-        
+        Uint8List tweak = Uint8List.fromList([
+          0x21,
+          0xbd,
+          0x18,
+          0x34,
+          0xbc,
+          0x08,
+          0x8c,
+          0xd2,
+          0xb4,
+          0xec,
+          0xbe,
+          0x30,
+          0xb7,
+          0x08,
+          0x98,
+          0xd7,
+        ]);
+
         // Encrypt an IPv6 address
-        Uint8List encryptedData = ipCryptExtendedNonDeterministic.encrypt('2001:db8::1', key, tweak);
-        print('Encrypted data: ${encryptedData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}');
-        
+        Uint8List encryptedData = ipCryptExtendedNonDeterministic.encrypt(
+          '2001:db8::1',
+          hexStringToBytes(key),
+          tweak,
+        );
+        print(
+          'Encrypted data: ${encryptedData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}',
+        );
+
         // Decrypt back to the original
-        String decryptedIp = ipCryptExtendedNonDeterministic.decrypt(encryptedData, key);
+        String decryptedIp = ipCryptExtendedNonDeterministic.decrypt(
+          encryptedData,
+          hexStringToBytes(key),
+        );
         print('Decrypted IP: $decryptedIp');
       }
 ---
@@ -79,7 +130,7 @@ Add IPCrypt to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  ipcrypt: ^latest_version
+  ipcrypt: any
 ```
 
 Then run:
@@ -90,7 +141,7 @@ dart pub get
 
 ## Requirements
 
-- Dart SDK 3.8 or higher
+- Dart SDK 3.9 or higher
 - No external dependencies
 
 ## Usage
@@ -109,13 +160,19 @@ import 'package:ipcrypt/ipcrypt.dart';
 void main() {
   // 16-byte key as hex string
   String key = '2b7e151628aed2a6abf7158809cf4f3c';
-  
+
   // Encrypt an IP address
-  String encryptedIp = ipCryptDeterministic.encrypt('192.0.2.1', key);
+  String encryptedIp = ipCryptDeterministic.encrypt(
+    '192.0.2.1',
+    hexStringToBytes(key),
+  );
   print('Encrypted IP: $encryptedIp');
-  
+
   // Decrypt back to the original
-  String decryptedIp = ipCryptDeterministic.decrypt(encryptedIp, key);
+  String decryptedIp = ipCryptDeterministic.decrypt(
+    encryptedIp,
+    hexStringToBytes(key),
+  );
   print('Decrypted IP: $decryptedIp');
 }
 ```
@@ -129,16 +186,34 @@ import 'dart:typed_data';
 void main() {
   // 16-byte key as hex string
   String key = '2b7e151628aed2a6abf7158809cf4f3c';
-  
+
   // 8-byte tweak for randomization
-  Uint8List tweak = Uint8List.fromList([0x08, 0xe0, 0xc2, 0x89, 0xbf, 0xf2, 0x3b, 0x7c]);
-  
+  Uint8List tweak = Uint8List.fromList([
+    0x08,
+    0xe0,
+    0xc2,
+    0x89,
+    0xbf,
+    0xf2,
+    0x3b,
+    0x7c,
+  ]);
+
   // Encrypt an IP address
-  Uint8List encryptedData = ipCryptNonDeterministic.encrypt('192.0.2.1', key, tweak);
-  print('Encrypted data: ${encryptedData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}');
-  
+  Uint8List encryptedData = ipCryptNonDeterministic.encrypt(
+    '192.0.2.1',
+    hexStringToBytes(key),
+    tweak,
+  );
+  print(
+    'Encrypted data: ${encryptedData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}',
+  );
+
   // Decrypt back to the original
-  String decryptedIp = ipCryptNonDeterministic.decrypt(encryptedData, key);
+  String decryptedIp = ipCryptNonDeterministic.decrypt(
+    encryptedData,
+    hexStringToBytes(key),
+  );
   print('Decrypted IP: $decryptedIp');
 }
 ```
@@ -151,17 +226,44 @@ import 'dart:typed_data';
 
 void main() {
   // 32-byte key as hex string (two 16-byte keys)
-  String key = '2b7e151628aed2a6abf7158809cf4f3c1032547698badcfeefcdab8967452301';
-  
+  String key =
+      '2b7e151628aed2a6abf7158809cf4f3c1032547698badcfeefcdab8967452301';
+
   // 16-byte tweak for enhanced randomization
-  Uint8List tweak = Uint8List.fromList([0x21, 0xbd, 0x18, 0x34, 0xbc, 0x08, 0x8c, 0xd2, 0xb4, 0xec, 0xbe, 0x30, 0xb7, 0x08, 0x98, 0xd7]);
-  
+  Uint8List tweak = Uint8List.fromList([
+    0x21,
+    0xbd,
+    0x18,
+    0x34,
+    0xbc,
+    0x08,
+    0x8c,
+    0xd2,
+    0xb4,
+    0xec,
+    0xbe,
+    0x30,
+    0xb7,
+    0x08,
+    0x98,
+    0xd7,
+  ]);
+
   // Encrypt an IPv6 address
-  Uint8List encryptedData = ipCryptExtendedNonDeterministic.encrypt('2001:db8::1', key, tweak);
-  print('Encrypted data: ${encryptedData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}');
-  
+  Uint8List encryptedData = ipCryptExtendedNonDeterministic.encrypt(
+    '2001:db8::1',
+    hexStringToBytes(key),
+    tweak,
+  );
+  print(
+    'Encrypted data: ${encryptedData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}',
+  );
+
   // Decrypt back to the original
-  String decryptedIp = ipCryptExtendedNonDeterministic.decrypt(encryptedData, key);
+  String decryptedIp = ipCryptExtendedNonDeterministic.decrypt(
+    encryptedData,
+    hexStringToBytes(key),
+  );
   print('Decrypted IP: $decryptedIp');
 }
 ```
@@ -172,16 +274,16 @@ void main() {
 
 ```dart
 // Encrypt an IP address
-String ipCryptDeterministic.encrypt(String ipAddress, String key)
+String ipCryptDeterministic.encrypt(String ipAddress, Uint8List key)
 
 // Decrypt an encrypted IP address
-String ipCryptDeterministic.decrypt(String encryptedIp, String key)
+String ipCryptDeterministic.decrypt(String encryptedIp, Uint8List key)
 ```
 
 **Parameters:**
 - `ipAddress`: IPv4 or IPv6 address as a string
 - `encryptedIp`: Encrypted IP address as a string
-- `key`: 16-byte key as a hex string (32 characters)
+- `key`: 16-byte key as Uint8List
 
 **Returns:** IP address as a string
 
@@ -189,15 +291,15 @@ String ipCryptDeterministic.decrypt(String encryptedIp, String key)
 
 ```dart
 // Encrypt an IP address
-Uint8List ipCryptNonDeterministic.encrypt(String ipAddress, String key, Uint8List tweak)
+Uint8List ipCryptNonDeterministic.encrypt(String ipAddress, Uint8List key, Uint8List tweak)
 
 // Decrypt encrypted data
-String ipCryptNonDeterministic.decrypt(Uint8List encryptedData, String key)
+String ipCryptNonDeterministic.decrypt(Uint8List encryptedData, Uint8List key)
 ```
 
 **Parameters:**
 - `ipAddress`: IPv4 or IPv6 address as a string
-- `key`: 16-byte key as a hex string (32 characters)
+- `key`: 16-byte key as Uint8List
 - `tweak`: 8-byte tweak as Uint8List
 - `encryptedData`: Encrypted data as Uint8List (24 bytes: 8-byte tweak + 16-byte ciphertext)
 
@@ -215,7 +317,7 @@ String ipCryptExtendedNonDeterministic.decrypt(Uint8List encryptedData, String k
 
 **Parameters:**
 - `ipAddress`: IPv4 or IPv6 address as a string
-- `key`: 32-byte key as a hex string (64 characters)
+- `key`: 32-byte key as Uint8List
 - `tweak`: 16-byte tweak as Uint8List
 - `encryptedData`: Encrypted data as Uint8List (32 bytes: 16-byte tweak + 16-byte ciphertext)
 
@@ -265,37 +367,76 @@ import 'dart:typed_data';
 
 void demonstrateIPCrypt() {
   // Test data
-  String key16 = '2b7e151628aed2a6abf7158809cf4f3c';
-  String key32 = '2b7e151628aed2a6abf7158809cf4f3c1032547698badcfeefcdab8967452301';
+  Uint8List key16 = hexStringToBytes('2b7e151628aed2a6abf7158809cf4f3c');
+  Uint8List key32 = hexStringToBytes(
+    '2b7e151628aed2a6abf7158809cf4f3c1032547698badcfeefcdab8967452301',
+  );
   String ipv4 = '192.0.2.1';
   String ipv6 = '2001:db8::1';
-  
+
   print('=== IPCrypt Dart Demo ===\n');
-  
+
   // Deterministic encryption
   print('1. Deterministic Encryption:');
   String encIPv4 = ipCryptDeterministic.encrypt(ipv4, key16);
   String decIPv4 = ipCryptDeterministic.decrypt(encIPv4, key16);
-  print('  Original: $ipv4');
+  print('   Original: $ipv4');
   print('  Encrypted: $encIPv4');
   print('  Decrypted: $decIPv4\n');
-  
+
   // Non-deterministic encryption
   print('2. Non-Deterministic Encryption:');
-  Uint8List tweak8 = Uint8List.fromList([0x08, 0xe0, 0xc2, 0x89, 0xbf, 0xf2, 0x3b, 0x7c]);
+  Uint8List tweak8 = Uint8List.fromList([
+    0x08,
+    0xe0,
+    0xc2,
+    0x89,
+    0xbf,
+    0xf2,
+    0x3b,
+    0x7c,
+  ]);
   Uint8List encData = ipCryptNonDeterministic.encrypt(ipv4, key16, tweak8);
   String decIPv4ND = ipCryptNonDeterministic.decrypt(encData, key16);
-  print('  Original: $ipv4');
-  print('  Encrypted: ${encData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}');
+  print('   Original: $ipv4');
+  print(
+    '  Encrypted: ${encData.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}',
+  );
   print('  Decrypted: $decIPv4ND\n');
-  
+
   // Extended non-deterministic encryption
   print('3. Extended Non-Deterministic Encryption:');
-  Uint8List tweak16 = Uint8List.fromList([0x21, 0xbd, 0x18, 0x34, 0xbc, 0x08, 0x8c, 0xd2, 0xb4, 0xec, 0xbe, 0x30, 0xb7, 0x08, 0x98, 0xd7]);
-  Uint8List encDataExt = ipCryptExtendedNonDeterministic.encrypt(ipv6, key32, tweak16);
-  String decIPv6Ext = ipCryptExtendedNonDeterministic.decrypt(encDataExt, key32);
-  print('  Original: $ipv6');
-  print('  Encrypted: ${encDataExt.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}');
+  Uint8List tweak16 = Uint8List.fromList([
+    0x21,
+    0xbd,
+    0x18,
+    0x34,
+    0xbc,
+    0x08,
+    0x8c,
+    0xd2,
+    0xb4,
+    0xec,
+    0xbe,
+    0x30,
+    0xb7,
+    0x08,
+    0x98,
+    0xd7,
+  ]);
+  Uint8List encDataExt = ipCryptExtendedNonDeterministic.encrypt(
+    ipv6,
+    key32,
+    tweak16,
+  );
+  String decIPv6Ext = ipCryptExtendedNonDeterministic.decrypt(
+    encDataExt,
+    key32,
+  );
+  print('   Original: $ipv6');
+  print(
+    '  Encrypted: ${encDataExt.map((b) => b.toRadixString(16).padLeft(2, '0')).join()}',
+  );
   print('  Decrypted: $decIPv6Ext');
 }
 
