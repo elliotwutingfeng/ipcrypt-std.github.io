@@ -309,10 +309,10 @@ String ipCryptNonDeterministic.decrypt(Uint8List encryptedData, Uint8List key)
 
 ```dart
 // Encrypt an IP address
-Uint8List ipCryptExtendedNonDeterministic.encrypt(String ipAddress, String key, Uint8List tweak)
+Uint8List ipCryptExtendedNonDeterministic.encrypt(String ipAddress, Uint8List key, Uint8List tweak)
 
 // Decrypt encrypted data
-String ipCryptExtendedNonDeterministic.decrypt(Uint8List encryptedData, String key)
+String ipCryptExtendedNonDeterministic.decrypt(Uint8List encryptedData, Uint8List key)
 ```
 
 **Parameters:**
