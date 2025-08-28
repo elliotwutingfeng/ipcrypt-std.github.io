@@ -275,4 +275,4 @@ When implementing IPCrypt in real-world applications, consider the following:
 
 Ready to implement IPCrypt in your project? Check out our [developer resources]({{ site.baseurl }}/resources/) and choose from [multiple language implementations]({{ site.baseurl }}/implementations/).
 
-For a detailed understanding of the cryptographic constructions, read the full [specification](https://jedisct1.github.io/draft-denis-ipcrypt/draft-denis-ipcrypt.html){:target="_blank" rel="noopener"}.
+For a detailed understanding of the cryptographic constructions, read the full [specification](https://datatracker.ietf.org/doc/draft-denis-ipcrypt/){:target="_blank" rel="noopener"}.

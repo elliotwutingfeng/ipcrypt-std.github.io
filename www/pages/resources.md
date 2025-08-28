@@ -16,7 +16,7 @@ This page offers helpful resources for anyone interested in IPCrypt. Whether you
 If you're new to IPCrypt, here are some places to start:
 
 1. **Visit the [About IPCrypt]({{ site.baseurl }}/about/) page** for a general overview
-2. **Look at the [Specification](https://jedisct1.github.io/draft-denis-ipcrypt/draft-denis-ipcrypt.html){:target="_blank" rel="noopener"}** for technical details
+2. **Look at the [Specification](https://datatracker.ietf.org/doc/draft-denis-ipcrypt/){:target="_blank" rel="noopener"}** for technical details
 3. **Browse the [Implementations]({{ site.baseurl }}/implementations/)** to see what's available in different languages
 
 ### Quick Start Guide

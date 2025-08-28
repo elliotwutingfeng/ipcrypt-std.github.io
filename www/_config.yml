@@ -79,7 +79,7 @@ include:
 # Custom variables
 github_repo: https://github.com/jedisct1/draft-denis-ipcrypt
 ietf_datatracker: https://datatracker.ietf.org/doc/draft-denis-ipcrypt
-editors_copy: https://jedisct1.github.io/draft-denis-ipcrypt/#go.draft-denis-ipcrypt.html
+editors_copy: https://datatracker.ietf.org/doc/draft-denis-ipcrypt/
 
 # Navigation
 navigation:

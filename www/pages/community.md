@@ -115,7 +115,7 @@ Contributors to IPCrypt are recognized in several ways:
 
 Ready to contribute? Here's how to get started:
 
-1. **Familiarize Yourself with IPCrypt**: Read the [specification](https://jedisct1.github.io/draft-denis-ipcrypt/draft-denis-ipcrypt.html){:target="_blank" rel="noopener"} and understand the project goals
+1. **Familiarize Yourself with IPCrypt**: Read the [specification](https://datatracker.ietf.org/doc/draft-denis-ipcrypt/){:target="_blank" rel="noopener"} and understand the project goals
 2. **Set Up Your Development Environment**: Clone the repository and set up the necessary tools
 3. **Find an Issue to Work On**: Look for issues labeled "good first issue" or "help wanted"
 4. **Discuss Your Approach**: Before making significant changes, discuss your approach with the community

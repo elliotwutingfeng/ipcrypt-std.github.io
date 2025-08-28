@@ -70,7 +70,7 @@ permalink: /playground/
         </ul>
         
         <p class="mb-4">
-            For more information about the encryption modes and their properties, see the <a href="https://jedisct1.github.io/draft-denis-ipcrypt/draft-denis-ipcrypt.html" target="_blank" rel="noopener">IPCrypt specification</a>.
+            For more information about the encryption modes and their properties, see the <a href="https://datatracker.ietf.org/doc/draft-denis-ipcrypt/" target="_blank" rel="noopener">IPCrypt specification</a>.
         </p>
     </div>
 </div>
