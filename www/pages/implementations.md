@@ -66,6 +66,15 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
     </div>
     
     <div class="implementation-card">
+        <span class="language-badge">Lua</span>
+        <h3 class="text-xl font-bold">Lua</h3>
+        <p>Lightweight implementation for Lua applications.</p>
+        <p class="mt-4">
+            <a href="https://github.com/jedisct1/ipcrypt-lua" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+        </p>
+    </div>
+    
+    <div class="implementation-card">
         <span class="language-badge">Swift</span>
         <h3 class="text-xl font-bold">Swift</h3>
         <p>Native implementation for iOS, macOS, and Swift applications.</p>
@@ -175,6 +184,16 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
             </tr>
             <tr>
                 <td class="py-2 px-4 border">Go</td>
+                <td class="py-2 px-4 border">Native</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border">ISC</td>
+            </tr>
+            <tr>
+                <td class="py-2 px-4 border">Lua</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
