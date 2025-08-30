@@ -1,7 +1,7 @@
 ---
 layout: page
 title: IPCrypt Implementations
-description: Explore the various implementations of IPCrypt across different programming languages, including Python, C, Rust, JavaScript, Go, Dart, Zig, PHP, and D.
+description: Explore the various implementations of IPCrypt across different programming languages, including Python, C, Rust, JavaScript, Go, Ruby, Dart, Zig, PHP, and D.
 permalink: /implementations/
 ---
 
@@ -89,6 +89,15 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
         <p>Native implementation for Elixir applications.</p>
         <p class="mt-4">
             <a href="https://github.com/jedisct1/ipcrypt-elixir" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+        </p>
+    </div>
+    
+    <div class="implementation-card">
+        <span class="language-badge">Ruby</span>
+        <h3 class="text-xl font-bold">Ruby</h3>
+        <p>Native implementation for Ruby applications.</p>
+        <p class="mt-4">
+            <a href="https://github.com/jedisct1/ipcrypt-ruby" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
         </p>
     </div>
     
@@ -223,6 +232,16 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
             </tr>
             <tr>
                 <td class="py-2 px-4 border">Elixir</td>
+                <td class="py-2 px-4 border">Native</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border">ISC</td>
+            </tr>
+            <tr>
+                <td class="py-2 px-4 border">Ruby</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>

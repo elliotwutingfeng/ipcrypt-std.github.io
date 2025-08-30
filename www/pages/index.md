@@ -150,7 +150,7 @@ permalink: /
                     <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
                         <h3 class="text-xl font-bold mb-3">Freely Available in Many Programming Languages</h3>
                         <p class="mb-4">
-                            IPCrypt has been implemented in Python, C, Rust, JavaScript, Go, Lua, Swift, Elixir, Dart, Zig, PHP, D, and more, making it accessible to developers across different platforms.
+                            IPCrypt has been implemented in Python, C, Rust, JavaScript, Go, Lua, Swift, Elixir, Ruby, Dart, Zig, PHP, D, and more, making it accessible to developers across different platforms.
                         </p>
                         <p class="mb-6">
                             Each implementation is open source and follows the same specification, allowing developers to choose the language that best fits their project.
@@ -167,6 +167,7 @@ permalink: /
                             <span class="language-badge">Lua</span>
                             <span class="language-badge">Swift</span>
                             <span class="language-badge">Elixir</span>
+                            <span class="language-badge">Ruby</span>
                             <span class="language-badge">Dart</span>
                             <span class="language-badge">Zig</span>
                             <span class="language-badge">PHP</span>
