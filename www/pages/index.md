@@ -24,7 +24,7 @@ permalink: /
         <div class="max-w-3xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 text-center">What is IPCrypt?</h2>
             <p class="text-lg mb-6">
-                IPCrypt is a simple, open specification that suggests methods for encrypting and obfuscating IP addresses. It offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
+                IPCrypt is a simple, open specification that defines methods for encrypting and obfuscating IP addresses. It offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
             </p>
             <p class="text-lg mb-6">
                 Unlike truncation that destroys data irreversibly and hashing that cannot be reversed, IPCrypt provides mathematically secure, reversible encryption designed for high-performance processing at network speeds.
