@@ -27,7 +27,7 @@ permalink: /
                 IPCrypt is a simple, open specification that defines methods for encrypting and obfuscating IP addresses. It offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
             </p>
             <p class="text-lg mb-6">
-                Unlike truncation that destroys data irreversibly and hashing that cannot be reversed, IPCrypt provides mathematically secure, reversible encryption designed for high-performance processing at network speeds.
+                Unlike truncation that destroys data irreversibly and hashing that cannot be reversed, IPCrypt provides cryptographically secure, reversible encryption designed for high-performance processing at network speeds.
             </p>
             <p class="text-lg mb-6">
                 <strong>Simplicity</strong> is a core value in IPCrypt's design. Rather than trying to create new cryptographic methods, we've used established standards that are well-understood and widely available, making it easier for anyone to implement.
