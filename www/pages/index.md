@@ -9,7 +9,7 @@ permalink: /
     <div class="container mx-auto px-4 py-12 text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-6">A Common Approach to IP Address Encryption</h1>
         <p class="text-xl max-w-3xl mx-auto mb-8">
-            IPCrypt provides secure, efficient methods for encrypting IP addresses for privacy-preserving storage, logging, and analytics while enabling data analysis without exposing user information.
+            IPCrypt is a simple, open specification for encrypting and obfuscating IP addresses, balancing privacy considerations with practical network operations.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ site.baseurl }}/about/" class="btn btn-primary">Learn More</a>
