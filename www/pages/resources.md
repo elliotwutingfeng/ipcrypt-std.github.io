@@ -21,13 +21,17 @@ If you're new to IPCrypt, here are some places to start:
 
 ### Quick Start Guide
 
-If you'd like to try IPCrypt:
+To implement IPCrypt:
 
-1. **Find an implementation** in a programming language you're comfortable with
-2. **Follow the installation instructions** for that implementation
-3. **Create a cryptographic key** (16 bytes for deterministic/nd modes, 32 bytes for ndx mode)
-4. **Try encrypting some IP addresses** using one of the three modes
-5. **Use the encrypted addresses** in your application as needed
+1. **Choose an encryption mode** based on your requirements:
+   - `ipcrypt-deterministic`: When you need format preservation or duplicate detection
+   - `ipcrypt-nd`: For general privacy protection with reasonable storage overhead
+   - `ipcrypt-ndx`: For maximum privacy protection when storage permits
+2. **Generate appropriate keys**:
+   - 16 bytes (128 bits) for deterministic and nd modes
+   - 32 bytes (256 bits) for ndx mode
+3. **For non-deterministic modes**, use uniformly random tweaks
+4. **Test against the specification's test vectors** to ensure correctness
 
 ## Implementation Information
 
@@ -48,7 +52,7 @@ When working with IPCrypt, here are some suggestions that might be helpful:
 2. **Handle Errors Kindly**: Consider how your code will respond if something unexpected happens
 3. **Think About Timing**: For security-sensitive applications, constant-time operations can help prevent timing analysis
 4. **Test Your Code**: You might want to check your implementation against the examples in the specification
-5. **Keep Notes**: It can be helpful to document which encryption mode and key you're using for different purposes
+5. **Performance Optimization**: All variants are designed for single-block speed critical for network-rate processing
 
 ## Simple Examples
 
@@ -128,6 +132,25 @@ func rateLimit(clientIP string) bool {
 }
 ```
 
+## Network Hierarchy and Metadata
+
+IPCrypt does not preserve network hierarchy or prefix relationships. Addresses from the same subnet will not appear related after encryption.
+
+For analytics requiring network metadata:
+1. **Extract metadata before encryption** (country, ASN, network type)
+2. **Store metadata separately** alongside encrypted addresses
+3. **Avoid truncation** - it provides inconsistent privacy and destroys data irreversibly
+
+Example:
+```json
+{
+  "encrypted_ip": "bde9:6789:d353:824c:d7c6:f58a:6bd2:26eb",
+  "country": "US",
+  "asn": 15169,
+  "network_type": "cloud_provider"
+}
+```
+
 ## Ideas for Using IPCrypt
 
 ### Storing Encrypted IPs in Databases
@@ -183,15 +206,21 @@ If you're sharing data with other organizations:
 4. **Look at the Byte Values**: Sometimes examining the actual bytes can help find issues
 5. **Be Consistent with Encoding**: Especially for non-deterministic outputs, consistent encoding is important
 
-## Security Thoughts
+## Security Considerations
 
-When using IPCrypt, here are some security considerations to keep in mind:
+IPCrypt provides strong confidentiality but explicitly does not provide integrity protection:
 
-1. **Protect Your Keys**: The security of encrypted data depends on keeping the keys private
-2. **Patterns in Deterministic Mode**: Remember that deterministic encryption will show patterns in the data
-3. **Random Tweaks Matter**: For non-deterministic modes, try to use good random number generators for tweaks
-4. **Timing Considerations**: When possible, using constant-time operations can help with security
-5. **Format Considerations**: For strict IPv4 format preservation, cycle-walking might be helpful
+**What IPCrypt protects against:**
+- Unauthorized parties learning original IP addresses (without the key)
+- Statistical analysis revealing patterns (non-deterministic modes)
+- Brute-force attacks on the address space (128-bit security level)
+
+**What IPCrypt does NOT protect against:**
+- Active attackers modifying encrypted addresses
+- Authorized key holders decrypting addresses (by design)
+- Traffic analysis based on volume and timing
+
+For applications requiring integrity, add authentication mechanisms like HMAC or authenticated encryption modes.
 
 ## Other Helpful Resources
 

@@ -9,35 +9,35 @@ permalink: /about/
 
 IPCrypt is a simple, open specification that suggests methods for encrypting and obfuscating IP addresses. It offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
 
-This community effort was inspired by privacy concerns highlighted in [RFC6973](https://datatracker.ietf.org/doc/html/rfc6973) and [RFC7258](https://datatracker.ietf.org/doc/html/rfc7258) about pervasive monitoring and data collection. We aimed to help maintain the practical utility of IP addresses in network operations while addressing these privacy considerations.
+This specification addresses concerns raised in [RFC7624](https://datatracker.ietf.org/doc/html/rfc7624) regarding confidentiality when sharing data with third parties, providing cryptographically sound techniques that enable data analysis while protecting user privacy from parties without key access.
 
-## The Challenge We're Trying to Help With
+## The Challenge We're Addressing
 
-IP addresses are fundamental to network operations but present some privacy challenges:
+IP addresses are personally identifiable information requiring protection, yet common techniques have fundamental limitations:
 
-1. **Privacy Considerations**: IP addresses can potentially reveal information about users
-2. **Regulatory Context**: Some jurisdictions consider IP addresses as personal data (e.g., GDPR)
-3. **Research Limitations**: Difficulty sharing network data for research or analysis
-4. **Service Provider Concerns**: Sharing raw IP addresses with external services raises privacy questions
-5. **Varied Approaches**: Different organizations use different methods to protect IP addresses
+1. **Truncation Problems**: Zeroing parts of addresses provides unpredictable privacy - a /24 mask may hide one user or thousands
+2. **Hashing Limitations**: Produces non-reversible outputs unsuitable for operational tasks like abuse investigation
+3. **Ad-hoc Schemes**: Often lack rigorous security analysis and cannot interoperate between systems
+4. **Generic Encryption Issues**: Expands data unpredictably, breaks compatibility with network tools, operates too slowly for high-volume processing
+5. **Regulatory Requirements**: GDPR and similar regulations require proper protection of IP addresses as personal data
 
-IPCrypt tries to offer a simple, consistent approach to IP address encryption that anyone can implement.
+IPCrypt resolves these conflicts through purpose-built cryptographic techniques designed for network-rate processing.
 
 ## Potential Benefits
 
 ### For Network Operators
 
-- **Practical Functionality**: Use IP addresses for routing, logging, and analytics while considering privacy
-- **Regulatory Considerations**: May help with data protection requirements by encrypting identifiers
-- **Research Possibilities**: Share network data with researchers without exposing raw addresses
-- **Common Approach**: Use a shared specification instead of creating custom solutions
+- **Efficiency and Compactness**: All variants operate on exactly 128 bits, achieving single-block encryption speed
+- **High Usage Limits**: Non-deterministic variants safely handle ~4 billion (nd) to ~18 quintillion (ndx) operations per key
+- **Format Preservation**: Deterministic mode produces valid IP addresses that flow through existing infrastructure
+- **Interoperability**: Identical results across implementations enable seamless data exchange
 
 ### For Privacy Advocates
 
-- **User Privacy**: Help protect user information in logs and analytics
-- **Reduced Tracking**: Non-deterministic modes can prevent correlation across datasets
-- **Open Methods**: Clearly defined cryptographic approaches with known properties
-- **Versatile Application**: Works with both IPv4 and IPv6 addresses
+- **Protection Against Third Parties**: Prevents unauthorized access to user information without the encryption key
+- **Correlation Attack Resistance**: Non-deterministic modes use random tweaks to hide patterns
+- **Mathematically Provable Security**: Unlike truncation or basic hashing, provides rigorous security properties
+- **Privacy-Preserving Analytics**: Enables counting, rate limiting, and deduplication without exposing original values
 
 ### For Developers
 
@@ -52,54 +52,54 @@ IPCrypt operates by converting IP addresses to a 16-byte representation and then
 
 1. **IP Address Conversion**: Both IPv4 and IPv6 addresses are converted to a standard 16-byte format
 2. **Encryption**: The 16-byte representation is encrypted using one of three modes:
-   - **Deterministic**: Using AES-128 as a single-block operation
-   - **Non-deterministic (ND)**: Using KIASU-BC with an 8-byte tweak
-   - **Non-deterministic Extended (NDX)**: Using AES-XTS with a 16-byte tweak
-3. **Output**: The encrypted result is either returned as a 16-byte value (deterministic) or combined with the tweak (non-deterministic)
+   - **ipcrypt-deterministic**: Using AES-128 as a single-block operation
+   - **ipcrypt-nd**: Using KIASU-BC with an 8-byte tweak
+   - **ipcrypt-ndx**: Using AES-XTS with a 16-byte tweak
+3. **Output**: Deterministic produces 16 bytes, nd produces 24 bytes (16 + 8 tweak), ndx produces 32 bytes (16 + 16 tweak)
 
 ## Encryption Modes Explained
 
 ### ipcrypt-deterministic
 
-- Uses AES-128 in a single-block operation
-- Produces a 16-byte output that can be converted back to an IP address format
-- Always produces the same output for a given input and key
-- Suitable for applications where format preservation is required and linkability is acceptable
+- Uses AES-128 as a single-block operation
+- Produces a 16-byte output, most compact option
+- Same IP always produces same ciphertext (allows correlation but enables duplicate detection)
+- Choose when duplicate identification is needed or format preservation is critical
 
 ### ipcrypt-nd
 
 - Uses the KIASU-BC tweakable block cipher with an 8-byte tweak
-- Produces a 24-byte output (8-byte tweak + 16-byte ciphertext)
-- Different outputs for the same input due to random tweak
-- Suitable for applications where correlation protection is important
+- Produces a 24-byte output (16-byte ciphertext + 8-byte tweak)
+- Same IP produces different ciphertexts (prevents most correlation)
+- Approximately 4 billion operations per key safely
 
 ### ipcrypt-ndx
 
 - Uses the AES-XTS tweakable block cipher with a 16-byte tweak
-- Produces a 32-byte output (16-byte tweak + 16-byte ciphertext)
-- Highest security margin with 128-bit tweak space
-- Suitable for applications requiring maximum security and correlation protection
+- Produces a 32-byte output (16-byte ciphertext + 16-byte tweak)
+- Maximum privacy protection when storage permits
+- Approximately 18 quintillion operations per key safely
 
-## Comparison with Ad-hoc Mechanisms
+## Comparison with Common Approaches
 
-Many organizations currently use ad-hoc mechanisms to protect IP addresses, such as:
+Many organizations currently use flawed mechanisms to protect IP addresses:
 
-1. **Simple Hashing**: Vulnerable to rainbow table attacks
-2. **Truncation**: Removes information but doesn't provide cryptographic protection
-3. **Tokenization**: Often lacks consistency and security guarantees
-4. **Custom Encryption**: May have unknown security properties or implementation flaws
+1. **Truncation**: Irreversibly destroys data while providing inconsistent privacy (a /24 mask may hide one user or thousands)
+2. **Simple Hashing**: Non-reversible, unsuitable for operational tasks like abuse investigation
+3. **Ad-hoc Encryption**: Often lacks rigorous security analysis and cannot interoperate
+4. **Generic Encryption**: Too slow for network speeds, expands data unpredictably
 
-IPCrypt offers several advantages over these approaches:
+IPCrypt offers fundamental advantages:
 
-| Feature                     | Ad-hoc Mechanisms    | IPCrypt                              |
-| --------------------------- | -------------------- | ------------------------------------ |
-| Consistency                 | Varies widely        | Well-defined specification           |
-| Security Properties         | Often unclear        | Cryptographically sound              |
-| Implementation Availability | Limited              | Multiple languages                   |
-| Format Preservation         | Not always supported | Available in deterministic mode      |
-| Correlation Protection      | Rarely addressed     | Supported in non-deterministic modes |
-| Decryption Capability       | Often one-way        | Fully invertible                     |
-| Documentation               | Typically minimal    | Comprehensive specification          |
+| Feature                     | Common Approaches           | IPCrypt                                     |
+| --------------------------- | --------------------------- | ------------------------------------------- |
+| Speed                       | Varies, often slow          | Single-block speed for network rates        |
+| Data Size                   | Often expands significantly | Compact: 16-32 bytes total                 |
+| Reversibility               | Usually one-way             | Fully reversible with key                  |
+| Security Analysis           | Often unclear               | Mathematically provable properties         |
+| Interoperability            | Usually proprietary         | Standardized across implementations        |
+| Privacy Guarantees          | Inconsistent                | Configurable: deterministic or randomized  |
+| Format Preservation         | Rarely supported            | Available in deterministic mode            |
 
 ## Real-World Applications
 

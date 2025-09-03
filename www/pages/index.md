@@ -9,7 +9,7 @@ permalink: /
     <div class="container mx-auto px-4 py-12 text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-6">A Common Approach to IP Address Encryption</h1>
         <p class="text-xl max-w-3xl mx-auto mb-8">
-            IPCrypt is a simple, open specification for encrypting and obfuscating IP addresses, balancing privacy considerations with practical network operations.
+            IPCrypt provides secure, efficient methods for encrypting IP addresses for privacy-preserving storage, logging, and analytics while enabling data analysis without exposing user information.
         </p>
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ site.baseurl }}/about/" class="btn btn-primary">Learn More</a>
@@ -24,10 +24,10 @@ permalink: /
         <div class="max-w-3xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 text-center">What is IPCrypt?</h2>
             <p class="text-lg mb-6">
-                IPCrypt is a community-created specification that suggests methods for encrypting and obfuscating IP addresses. It aims to help network operators, researchers, and privacy advocates share or analyze data while considering address privacy.
+                IPCrypt is a simple, open specification that suggests methods for encrypting and obfuscating IP addresses. It offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
             </p>
             <p class="text-lg mb-6">
-                The specification offers both deterministic format-preserving and non-deterministic approaches that work with both IPv4 and IPv6 addresses.
+                Unlike truncation that destroys data irreversibly and hashing that cannot be reversed, IPCrypt provides mathematically secure, reversible encryption designed for high-performance processing at network speeds.
             </p>
             <p class="text-lg mb-6">
                 <strong>Simplicity</strong> is a core value in IPCrypt's design. Rather than trying to create new cryptographic methods, we've used established standards that are well-understood and widely available, making it easier for anyone to implement.
@@ -44,42 +44,42 @@ permalink: /
             <div class="feature-card">
                 <h3 class="text-xl font-bold mb-3">Privacy Protection</h3>
                 <p>
-                    Encrypt IP addresses to prevent disclosure of user-specific information when data is logged or measured, as discussed in RFC6973.
+                    Prevent exposure of sensitive user information to third parties without key access, addressing data minimization concerns from RFC6973.
                 </p>
             </div>
             
             <div class="feature-card">
                 <h3 class="text-xl font-bold mb-3">Format Preservation</h3>
                 <p>
-                    Ensure that encrypted output remains a valid IP address, allowing network devices to process the data without modification.
+                    Deterministic mode produces valid IP addresses, enabling encrypted addresses to flow through existing infrastructure without modification.
                 </p>
             </div>
             
             <div class="feature-card">
                 <h3 class="text-xl font-bold mb-3">Correlation Protection</h3>
                 <p>
-                    Non-deterministic modes use a random tweak to obscure linkability while keeping the underlying input confidential.
+                    Non-deterministic modes use random tweaks to produce different ciphertexts for the same IP, preventing pattern analysis.
                 </p>
             </div>
             
             <div class="feature-card">
                 <h3 class="text-xl font-bold mb-3">Privacy-Preserving Analytics</h3>
                 <p>
-                    Perform common operations like counting unique clients or implementing rate limiting using encrypted IP addresses without accessing original values.
+                    Count unique clients, implement rate limiting, and perform deduplication directly on encrypted addresses without revealing original values.
                 </p>
             </div>
             
             <div class="feature-card">
-                <h3 class="text-xl font-bold mb-3">Third-Party Service Integration</h3>
+                <h3 class="text-xl font-bold mb-3">Seamless Integration</h3>
                 <p>
-                    Use encrypted IP addresses as keys or identifiers when integrating with potentially untrusted third-party services or cloud providers.
+                    Use encrypted IPs as privacy-preserving identifiers when interacting with untrusted services, cloud providers, or external platforms.
                 </p>
             </div>
             
             <div class="feature-card">
-                <h3 class="text-xl font-bold mb-3">Consistent Approach</h3>
+                <h3 class="text-xl font-bold mb-3">High Performance</h3>
                 <p>
-                    Replace ad-hoc mechanisms with a well-defined, cryptographically sound specification that can be implemented consistently across systems.
+                    All variants operate on exactly 128 bits, achieving single-block encryption speed critical for network-rate processing.
                 </p>
             </div>
         </div>
@@ -111,10 +111,10 @@ permalink: /
             <div class="card">
                 <h3 class="text-xl font-bold mb-3">ipcrypt-deterministic</h3>
                 <p class="mb-4">
-                    Deterministic encryption using AES128 (applied as a single-block operation).
+                    Deterministic encryption using AES-128 as a single-block operation.
                 </p>
                 <p class="text-sm text-gray-600">
-                    Preserves format but reveals repeated inputs.
+                    16-byte output, format-preserving, allows duplicate detection.
                 </p>
             </div>
             
@@ -124,7 +124,7 @@ permalink: /
                     Non-deterministic encryption using the KIASU-BC tweakable block cipher with an 8-byte tweak.
                 </p>
                 <p class="text-sm text-gray-600">
-                    Produces a 24-byte output using an 8-byte tweak.
+                    24-byte output, ~4 billion operations per key safely.
                 </p>
             </div>
             
@@ -134,7 +134,7 @@ permalink: /
                     Non-deterministic encryption using the AES-XTS tweakable block cipher with a 16-byte tweak.
                 </p>
                 <p class="text-sm text-gray-600">
-                    Produces a 32-byte output using a 16-byte tweak.
+                    32-byte output, ~18 quintillion operations per key safely.
                 </p>
             </div>
         </div>
