@@ -1,7 +1,7 @@
 ---
 layout: page
 title: IPCrypt Implementations
-description: Explore the various implementations of IPCrypt across different programming languages, including Python, C, Rust, JavaScript, Go, Java, Ruby, Dart, Zig, PHP, and D.
+description: Explore the various implementations of IPCrypt across different programming languages, including Python, C, Rust, JavaScript, Go, Java, Ruby, Kotlin, AWK, Dart, Zig, PHP, and D.
 permalink: /implementations/
 ---
 
@@ -107,6 +107,24 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
         <p>Native implementation for Ruby applications.</p>
         <p class="mt-4">
             <a href="https://github.com/jedisct1/ipcrypt-ruby" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+        </p>
+    </div>
+    
+    <div class="implementation-card">
+        <span class="language-badge">Kotlin</span>
+        <h3 class="text-xl font-bold">Kotlin</h3>
+        <p>Native implementation for Kotlin applications.</p>
+        <p class="mt-4">
+            <a href="https://github.com/jedisct1/ipcrypt-kotlin" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+        </p>
+    </div>
+    
+    <div class="implementation-card">
+        <span class="language-badge">AWK</span>
+        <h3 class="text-xl font-bold">AWK</h3>
+        <p>Lightweight implementation for AWK scripting.</p>
+        <p class="mt-4">
+            <a href="https://github.com/jedisct1/ipcrypt.awk" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
         </p>
     </div>
     
@@ -261,6 +279,26 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
             </tr>
             <tr>
                 <td class="py-2 px-4 border">Ruby</td>
+                <td class="py-2 px-4 border">Native</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border">ISC</td>
+            </tr>
+            <tr>
+                <td class="py-2 px-4 border">Kotlin</td>
+                <td class="py-2 px-4 border">Native</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border">ISC</td>
+            </tr>
+            <tr>
+                <td class="py-2 px-4 border">AWK</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>

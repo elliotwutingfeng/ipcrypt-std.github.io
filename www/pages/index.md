@@ -1,7 +1,7 @@
 ---
 layout: default
 title: IPCrypt - IP Address Encryption and Obfuscation
-description: Proposed methods for encrypting and obfuscating IP addresses, providing both deterministic format-preserving and non-deterministic constructions, with implementations in Python, C, Rust, JavaScript, Go, Zig, PHP, and D.
+description: Proposed methods for encrypting and obfuscating IP addresses, providing both deterministic format-preserving and non-deterministic constructions, with implementations in Python, C, Rust, JavaScript, Go, Java, Ruby, Kotlin, AWK, Zig, PHP, and D.
 permalink: /
 ---
 
@@ -150,7 +150,7 @@ permalink: /
                     <div class="md:w-2/3 mb-6 md:mb-0 md:pr-8">
                         <h3 class="text-xl font-bold mb-3">Freely Available in Many Programming Languages</h3>
                         <p class="mb-4">
-                            IPCrypt has been implemented in Python, C, Rust, JavaScript, Go, Lua, Swift, Elixir, Ruby, Dart, Zig, PHP, D, and more, making it accessible to developers across different platforms.
+                            IPCrypt has been implemented in Python, C, Rust, JavaScript, Go, Java, Lua, Swift, Elixir, Ruby, Kotlin, AWK, Dart, Zig, PHP, D, and more, making it accessible to developers across different platforms.
                         </p>
                         <p class="mb-6">
                             Each implementation is open source and follows the same specification, allowing developers to choose the language that best fits their project.
