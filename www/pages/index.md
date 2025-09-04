@@ -1,7 +1,7 @@
 ---
 layout: default
 title: IPCrypt - IP Address Encryption and Obfuscation
-description: Proposed methods for encrypting and obfuscating IP addresses, providing both deterministic format-preserving and non-deterministic constructions, with implementations in Python, C, Rust, JavaScript, Go, Java, Ruby, Kotlin, AWK, Zig, PHP, and D.
+description: Methods for encrypting and obfuscating IP addresses, providing both deterministic format-preserving and non-deterministic constructions.
 permalink: /
 ---
 
@@ -164,10 +164,13 @@ permalink: /
                             <span class="language-badge">Rust</span>
                             <span class="language-badge">JavaScript</span>
                             <span class="language-badge">Go</span>
+                            <span class="language-badge">Java</span>
                             <span class="language-badge">Lua</span>
                             <span class="language-badge">Swift</span>
                             <span class="language-badge">Elixir</span>
                             <span class="language-badge">Ruby</span>
+                            <span class="language-badge">Kotlin</span>
+                            <span class="language-badge">AWK</span>
                             <span class="language-badge">Dart</span>
                             <span class="language-badge">Zig</span>
                             <span class="language-badge">PHP</span>
