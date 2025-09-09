@@ -21,7 +21,7 @@ Try IPCrypt directly in your browser with our interactive playground:
 
 ## Encryption Modes Comparison
 
-The following examples demonstrate the three encryption modes of IPCrypt:
+The following examples demonstrate the four encryption modes of IPCrypt:
 
 ### Deterministic Encryption (ipcrypt-deterministic)
 
@@ -148,6 +148,50 @@ The following examples demonstrate the three encryption modes of IPCrypt:
             <li>32-byte output (16-byte tweak + 16-byte ciphertext)</li>
             <li>Uses AES-XTS tweakable block cipher</li>
             <li>Highest security margin with 128-bit tweak space</li>
+        </ul>
+    </div>
+</div>
+
+### Prefix-Preserving Encryption (ipcrypt-pfx)
+
+<div class="example-card p-6 border rounded-lg mb-6">
+    <h3 class="text-xl font-bold mb-3">ipcrypt-pfx</h3>
+    
+    <div class="grid md:grid-cols-2 gap-4">
+        <div>
+            <h4 class="font-bold mb-2">Input</h4>
+            <div class="mb-4">
+                <div class="text-sm font-medium text-gray-500 mb-1">IP Addresses (Same /24 network):</div>
+                <div class="p-2 bg-gray-100 rounded font-mono">10.0.0.47</div>
+                <div class="p-2 bg-gray-100 rounded font-mono mt-1">10.0.0.129</div>
+                <div class="p-2 bg-gray-100 rounded font-mono mt-1">10.0.0.234</div>
+            </div>
+            <div class="mb-4">
+                <div class="text-sm font-medium text-gray-500 mb-1">Key (Hex):</div>
+                <div class="p-2 bg-gray-100 rounded font-mono break-all">2b7e151628aed2a6abf7158809cf4f3ca9f5ba40db214c3798f2e1c23456789a</div>
+            </div>
+        </div>
+        
+        <div>
+            <h4 class="font-bold mb-2">Output</h4>
+            <div>
+                <div class="text-sm font-medium text-gray-500 mb-1">Encrypted IPs (Same encrypted /24 prefix):</div>
+                <div class="p-2 bg-gray-100 rounded font-mono">19.214.210.244</div>
+                <div class="p-2 bg-gray-100 rounded font-mono mt-1">19.214.210.80</div>
+                <div class="p-2 bg-gray-100 rounded font-mono mt-1">19.214.210.30</div>
+                <div class="text-xs text-gray-600 mt-2">Note: All three share the encrypted prefix 19.214.210.x</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="mt-4">
+        <div class="text-sm font-medium text-gray-500 mb-1">Key Characteristics:</div>
+        <ul class="list-disc ml-6">
+            <li>Preserves network structure - addresses from same subnet share encrypted prefixes</li>
+            <li>Maintains native IP address sizes (4 bytes for IPv4, 16 bytes for IPv6)</li>
+            <li>Enables network-level analytics while protecting actual network identities</li>
+            <li>Deterministic - same input always produces same output with same key</li>
+            <li>Uses 32-byte key for enhanced security</li>
         </ul>
     </div>
 </div>

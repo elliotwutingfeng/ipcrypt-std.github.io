@@ -17,7 +17,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
     <div class="implementation-card">
         <span class="language-badge">Python</span>
         <h3 class="text-xl font-bold">Python</h3>
-        <p>Reference implementation with all three modes.</p>
+        <p>Reference implementation with all four modes.</p>
         <p class="text-sm text-gray-600 mt-2">
             <span class="text-primary">✓</span> Detailed documentation available
         </p>
@@ -179,6 +179,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <th class="py-2 px-4 border">Language</th>
                 <th class="py-2 px-4 border">Type</th>
                 <th class="py-2 px-4 border">Deterministic</th>
+                <th class="py-2 px-4 border">PFX</th>
                 <th class="py-2 px-4 border">ND (KIASU-BC)</th>
                 <th class="py-2 px-4 border">NDX (AES-XTS)</th>
                 <th class="py-2 px-4 border">IPv4</th>
@@ -195,12 +196,14 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border">ISC</td>
             </tr>
             <tr>
                 <td class="py-2 px-4 border">C</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -211,6 +214,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">Rust</td>
                 <td class="py-2 px-4 border">Native/Bindings</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -220,6 +224,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
             <tr>
                 <td class="py-2 px-4 border">JavaScript</td>
                 <td class="py-2 px-4 border">Native</td>
+                <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -235,12 +240,14 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border">ISC</td>
             </tr>
             <tr>
                 <td class="py-2 px-4 border">Java</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -251,6 +258,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">Lua</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -261,6 +269,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">Swift</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -271,6 +280,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">Elixir</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -281,6 +291,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">Ruby</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -291,6 +302,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">Kotlin</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -301,6 +313,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">AWK</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -311,6 +324,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">Dart</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -321,6 +335,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">Zig</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -331,6 +346,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">PHP</td>
                 <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
@@ -341,6 +357,7 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
                 <td class="py-2 px-4 border">D</td>
                 <td class="py-2 px-4 border">Bindings</td>
                 <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">✓</td>

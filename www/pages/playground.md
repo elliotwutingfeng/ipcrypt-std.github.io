@@ -30,6 +30,7 @@ permalink: /playground/
             <label for="encryption-mode" class="block mb-2 font-medium">Encryption Mode:</label>
             <select id="encryption-mode" class="w-full p-2 border rounded">
                 <option value="deterministic">ipcrypt-deterministic</option>
+                <option value="pfx">ipcrypt-pfx</option>
                 <option value="nd">ipcrypt-nd</option>
                 <option value="ndx">ipcrypt-ndx</option>
             </select>
@@ -65,6 +66,7 @@ permalink: /playground/
         
         <ul class="list-disc pl-6 mb-4">
             <li><strong>ipcrypt-deterministic</strong>: Format-preserving encryption that always produces the same output for the same input and key.</li>
+            <li><strong>ipcrypt-pfx</strong>: Prefix-preserving encryption that maintains network structure. Addresses from the same subnet share encrypted prefixes.</li>
             <li><strong>ipcrypt-nd</strong>: Non-deterministic encryption using KIASU-BC with an 8-byte tweak. Produces a 24-byte output.</li>
             <li><strong>ipcrypt-ndx</strong>: Non-deterministic encryption using AES-XTS with a 16-byte tweak. Produces a 32-byte output.</li>
         </ul>

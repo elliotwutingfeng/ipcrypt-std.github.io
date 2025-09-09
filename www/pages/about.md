@@ -50,12 +50,13 @@ IPCrypt resolves these conflicts through purpose-built cryptographic techniques 
 
 IPCrypt operates by converting IP addresses to a 16-byte representation and then applying cryptographic operations:
 
-1. **IP Address Conversion**: Both IPv4 and IPv6 addresses are converted to a standard 16-byte format
-2. **Encryption**: The 16-byte representation is encrypted using one of three modes:
+1. **IP Address Conversion**: Both IPv4 and IPv6 addresses are converted to a standard 16-byte format (except for ipcrypt-pfx which maintains native sizes)
+2. **Encryption**: The address is encrypted using one of four modes:
    - **ipcrypt-deterministic**: Using AES-128 as a single-block operation
+   - **ipcrypt-pfx**: Using dual AES-128 for prefix-preserving encryption
    - **ipcrypt-nd**: Using KIASU-BC with an 8-byte tweak
    - **ipcrypt-ndx**: Using AES-XTS with a 16-byte tweak
-3. **Output**: Deterministic produces 16 bytes, nd produces 24 bytes (16 + 8 tweak), ndx produces 32 bytes (16 + 16 tweak)
+3. **Output**: Deterministic produces 16 bytes, pfx maintains native sizes (4 bytes for IPv4, 16 for IPv6), nd produces 24 bytes (16 + 8 tweak), ndx produces 32 bytes (16 + 16 tweak)
 
 ## Encryption Modes Explained
 
@@ -65,6 +66,13 @@ IPCrypt operates by converting IP addresses to a 16-byte representation and then
 - Produces a 16-byte output, most compact option
 - Same IP always produces same ciphertext (allows correlation but enables duplicate detection)
 - Choose when duplicate identification is needed or format preservation is critical
+
+### ipcrypt-pfx
+
+- Uses dual AES-128 for bit-by-bit prefix-preserving encryption
+- Maintains native address sizes (4 bytes for IPv4, 16 bytes for IPv6)
+- Preserves network structure - addresses from same subnet share encrypted prefixes
+- Choose when network-level analytics are needed while protecting actual network identities
 
 ### ipcrypt-nd
 

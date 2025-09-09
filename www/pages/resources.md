@@ -134,12 +134,15 @@ func rateLimit(clientIP string) bool {
 
 ## Network Hierarchy and Metadata
 
-IPCrypt does not preserve network hierarchy or prefix relationships. Addresses from the same subnet will not appear related after encryption.
+Most IPCrypt modes (deterministic, nd, ndx) do not preserve network hierarchy or prefix relationships. Addresses from the same subnet will not appear related after encryption. However, the **ipcrypt-pfx mode specifically preserves network structure**, allowing addresses from the same subnet to share encrypted prefixes for network-level analytics.
 
-For analytics requiring network metadata:
-1. **Extract metadata before encryption** (country, ASN, network type)
-2. **Store metadata separately** alongside encrypted addresses
-3. **Avoid truncation** - it provides inconsistent privacy and destroys data irreversibly
+For analytics requiring network metadata, you have two options:
+
+1. **Use ipcrypt-pfx mode** to preserve network relationships while encrypting actual network identities
+2. **For other modes**, extract and store metadata separately:
+   - Extract metadata before encryption (country, ASN, network type)
+   - Store metadata separately alongside encrypted addresses
+   - Avoid truncation - it provides inconsistent privacy and destroys data irreversibly
 
 Example:
 ```json

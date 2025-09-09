@@ -104,10 +104,10 @@ permalink: /
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold mb-6 text-center">Encryption Modes</h2>
         <p class="text-lg text-center max-w-3xl mx-auto mb-12">
-            IPCrypt defines three concrete instantiations to meet different privacy and operational requirements:
+            IPCrypt defines four concrete instantiations to meet different privacy and operational requirements:
         </p>
         
-        <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8">
+        <div class="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="card">
                 <h3 class="text-xl font-bold mb-3">ipcrypt-deterministic</h3>
                 <p class="mb-4">
@@ -119,9 +119,19 @@ permalink: /
             </div>
             
             <div class="card">
+                <h3 class="text-xl font-bold mb-3">ipcrypt-pfx</h3>
+                <p class="mb-4">
+                    Prefix-preserving encryption using dual AES-128 operations.
+                </p>
+                <p class="text-sm text-gray-600">
+                    Native sizes, maintains network structure for analytics.
+                </p>
+            </div>
+            
+            <div class="card">
                 <h3 class="text-xl font-bold mb-3">ipcrypt-nd</h3>
                 <p class="mb-4">
-                    Non-deterministic encryption using the KIASU-BC tweakable block cipher with an 8-byte tweak.
+                    Non-deterministic encryption using KIASU-BC with an 8-byte tweak.
                 </p>
                 <p class="text-sm text-gray-600">
                     24-byte output, ~4 billion operations per key safely.
@@ -131,7 +141,7 @@ permalink: /
             <div class="card">
                 <h3 class="text-xl font-bold mb-3">ipcrypt-ndx</h3>
                 <p class="mb-4">
-                    Non-deterministic encryption using the AES-XTS tweakable block cipher with a 16-byte tweak.
+                    Non-deterministic encryption using AES-XTS with a 16-byte tweak.
                 </p>
                 <p class="text-sm text-gray-600">
                     32-byte output, ~18 quintillion operations per key safely.
@@ -195,7 +205,7 @@ permalink: /
                             Experience IPCrypt directly in your browser with our interactive playground. Encrypt and decrypt IP addresses using different modes, generate random keys and tweaks, and see the results instantly.
                         </p>
                         <p class="mb-6">
-                            The playground uses the JavaScript implementation of IPCrypt, allowing you to test all three encryption modes with both IPv4 and IPv6 addresses.
+                            The playground uses the JavaScript implementation of IPCrypt, allowing you to test all four encryption modes with both IPv4 and IPv6 addresses.
                         </p>
                         <a href="{{ site.baseurl }}/playground/" class="btn btn-primary">Try the Playground</a>
                     </div>

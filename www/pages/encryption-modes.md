@@ -7,7 +7,7 @@ permalink: /encryption-modes/
 
 # IPCrypt Encryption Modes
 
-IPCrypt provides three distinct encryption modes, each designed for specific use cases and security requirements. This page explains each mode in detail, including their operation, properties, and appropriate use cases.
+IPCrypt provides four distinct encryption modes, each designed for specific use cases and security requirements. This page explains each mode in detail, including their operation, properties, and appropriate use cases.
 
 <div class="feature-list">
     <div class="feature-item">
@@ -103,11 +103,37 @@ IPCrypt offers the following encryption modes:
     </div>
 </div>
 
+<div class="mode-card">
+    <div class="mode-card-header">
+        <div class="mode-card-icon pfx-icon">PFX</div>
+        <div>
+            <h3 class="mode-card-title">ipcrypt-pfx</h3>
+            <p class="mode-card-subtitle">Prefix-preserving encryption that maintains network structure</p>
+        </div>
+    </div>
+    <p>The prefix-preserving mode maintains network relationships in encrypted addresses, enabling network-level analytics while protecting actual network identities.</p>
+    <div class="feature-list">
+        <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text">Prefix preservation</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text">Network analytics</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text">Native address sizes</div>
+        </div>
+    </div>
+</div>
+
 <table class="mode-comparison">
     <thead>
         <tr>
             <th>Feature</th>
             <th>Deterministic</th>
+            <th>Prefix-Preserving (PFX)</th>
             <th>Non-Deterministic (ND)</th>
             <th>Extended ND (NDX)</th>
         </tr>
@@ -116,11 +142,13 @@ IPCrypt offers the following encryption modes:
         <tr>
             <td>Format Preservation</td>
             <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
             <td><span class="x">✗</span></td>
             <td><span class="x">✗</span></td>
         </tr>
         <tr>
             <td>Correlation Protection</td>
+            <td><span class="x">✗</span></td>
             <td><span class="x">✗</span></td>
             <td><span class="check">✓</span></td>
             <td><span class="check">✓</span></td>
@@ -128,17 +156,20 @@ IPCrypt offers the following encryption modes:
         <tr>
             <td>Output Size</td>
             <td>16 bytes</td>
+            <td>4/16 bytes</td>
             <td>24 bytes</td>
             <td>32 bytes</td>
         </tr>
         <tr>
             <td>Algorithm</td>
             <td>AES-128</td>
+            <td>Dual AES-128</td>
             <td>KIASU-BC</td>
             <td>AES-XTS</td>
         </tr>
         <tr>
             <td>Tweak Size</td>
+            <td>N/A</td>
             <td>N/A</td>
             <td>8 bytes</td>
             <td>16 bytes</td>
@@ -257,6 +288,187 @@ IPCrypt offers the following encryption modes:
     # Decrypt the IP address
     decrypted_ip = ipcrypt.decrypt_deterministic(encrypted_ip)
     print(f"Decrypted IP: {decrypted_ip}")
+    ```
+</div>
+
+## ipcrypt-pfx Mode
+
+<div class="mode-card">
+    <div class="mode-card-header">
+        <div class="mode-card-icon pfx-icon">PFX</div>
+        <div>
+            <h3 class="mode-card-title">How It Works</h3>
+            <p class="mode-card-subtitle">Prefix-preserving encryption using dual AES-128</p>
+        </div>
+    </div>
+    
+    <p>The prefix-preserving mode encrypts IP addresses while maintaining network structure. Addresses from the same network produce encrypted addresses that share a common encrypted prefix, enabling network analytics while protecting actual network identities.</p>
+    
+    <div class="diagram-container">
+        <pre class="encryption-diagram">
+    +----------------+     +----------------+     +----------------+
+    |                |     |                |     |                |
+    |   IP Address   |---->| Process each   |---->| For each bit:  |
+    | (192.168.1.1)  |     |  bit position  |     | Compute PRF    |
+    |                |     | sequentially   |     | XOR with input |
+    +----------------+     +----------------+     +----------------+
+                                                   |
+                           +----------------+      |
+                           |                |      |
+                           |  32-byte Key   |------+
+                           |                |
+                           +----------------+
+                                                   |
+                                                   v
+                           +----------------+     +----------------+
+                           |                |     |                |
+                           | Encrypted IP   |<----|  Maintains     |
+                           | (Same subnet   |     |  native size   |
+                           | = same prefix) |     | (4 or 16 bytes)|
+                           +----------------+     +----------------+
+        </pre>
+    </div>
+    
+    <h3>Process Flow</h3>
+    
+    <div class="feature-list">
+        <div class="feature-item">
+            <div class="feature-icon">1</div>
+            <div class="feature-text"><strong>Key Setup</strong>: The 32-byte key is used to initialize the encryption algorithm</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">2</div>
+            <div class="feature-text"><strong>Bit-by-bit Processing</strong>: Each bit of the IP address is processed sequentially from MSB to LSB</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">3</div>
+            <div class="feature-text"><strong>PRF Computation</strong>: For each bit, a pseudorandom function is computed based on the prefix processed so far</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">4</div>
+            <div class="feature-text"><strong>Bit Encryption</strong>: XOR the PRF's least significant bit with the current input bit</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">5</div>
+            <div class="feature-text"><strong>Native Size Preservation</strong>: IPv4 addresses remain 4 bytes, IPv6 addresses remain 16 bytes</div>
+        </div>
+    </div>
+    
+    <h3>Key Properties</h3>
+    
+    <div class="feature-list">
+        <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text"><strong>Prefix Preservation</strong>: Addresses from the same network share encrypted prefixes</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text"><strong>Network Analytics</strong>: Enables traffic pattern analysis without revealing actual networks</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text"><strong>Deterministic</strong>: Same IP always produces same encrypted output with given key</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text"><strong>Format Preservation</strong>: Maintains native IP address sizes and formats</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text"><strong>Security Beyond Birthday Bound</strong>: XOR of two AES permutations provides robust security</div>
+        </div>
+    </div>
+    
+    <h3>Use Cases</h3>
+    
+    <div class="feature-list">
+        <div class="feature-item">
+            <div class="feature-icon">🌐</div>
+            <div class="feature-text"><strong>Network Monitoring</strong>: Detect traffic patterns from common networks without identifying them</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-text"><strong>DDoS Mitigation</strong>: Implement network-level rate limiting on encrypted addresses</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">📊</div>
+            <div class="feature-text"><strong>Network Analytics</strong>: Analyze network topology without accessing raw IP addresses</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-text"><strong>Privacy-Preserving Monitoring</strong>: Monitor subnet traffic while protecting individual addresses</div>
+        </div>
+    </div>
+    
+    <h3>Important Considerations</h3>
+    
+    <div class="feature-list">
+        <div class="feature-item">
+            <div class="feature-icon">🔑</div>
+            <div class="feature-text"><strong>Key Requirement</strong>: Uses a 32-byte key for enhanced security</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">🔍</div>
+            <div class="feature-text"><strong>Network Visibility</strong>: This mode intentionally reveals network structure for analytics purposes</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">⚡</div>
+            <div class="feature-text"><strong>Performance</strong>: Requires 64 AES operations for IPv4 and 256 for IPv6 addresses</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">💾</div>
+            <div class="feature-text"><strong>Caching Optimization</strong>: Caching prefix computations improves performance for addresses in same subnet</div>
+        </div>
+    </div>
+    
+    <h3>Code Example</h3>
+    
+    ```python
+    from ipcrypt import IPCrypt
+    import os
+    
+    # Initialize with a 32-byte random key
+    key = os.urandom(32)  # Generate a secure random 32-byte key
+    ipcrypt = IPCrypt(key)
+    
+    # Encrypt IPv4 addresses from same subnet
+    ip1 = "10.0.0.47"
+    ip2 = "10.0.0.129"
+    encrypted_ip1 = ipcrypt.encrypt_pfx(ip1)
+    encrypted_ip2 = ipcrypt.encrypt_pfx(ip2)
+    
+    print(f"Original: {ip1} -> Encrypted: {encrypted_ip1}")
+    print(f"Original: {ip2} -> Encrypted: {encrypted_ip2}")
+    # Note: Both encrypted IPs will share the same /24 prefix
+    
+    # Decrypt the IP addresses
+    decrypted_ip1 = ipcrypt.decrypt_pfx(encrypted_ip1)
+    print(f"Decrypted: {decrypted_ip1}")
+    
+    # IPv6 example
+    ipv6 = "2001:db8::1"
+    encrypted_ipv6 = ipcrypt.encrypt_pfx(ipv6)
+    print(f"IPv6: {ipv6} -> {encrypted_ipv6}")
+    ```
+    
+    <h3>Prefix Preservation Example</h3>
+    
+    <p>The following example demonstrates how addresses from the same network maintain their relationship after encryption:</p>
+    
+    ```
+    Original Network: 192.168.1.0/24
+    ├── 192.168.1.10
+    ├── 192.168.1.25
+    └── 192.168.1.200
+    
+    Encrypted (with same key):
+    ├── 87.234.19.147  (shares encrypted /24 prefix)
+    ├── 87.234.19.201  (shares encrypted /24 prefix)
+    └── 87.234.19.42   (shares encrypted /24 prefix)
+    
+    Note: The encrypted prefix (87.234.19.x) is cryptographically
+    transformed and unrecognizable without the key, but the
+    network relationship is preserved.
     ```
 </div>
 
@@ -532,27 +744,31 @@ IPCrypt offers the following encryption modes:
     <div class="feature-list">
         <div class="feature-item">
             <div class="feature-icon">1</div>
-            <div class="feature-text"><strong>Format Requirements</strong>: If you need to maintain the IP address format, use deterministic mode</div>
+            <div class="feature-text"><strong>Format Requirements</strong>: If you need to maintain the IP address format, use deterministic or pfx mode</div>
         </div>
         <div class="feature-item">
             <div class="feature-icon">2</div>
-            <div class="feature-text"><strong>Correlation Protection</strong>: If preventing correlation is important, use nd or ndx mode</div>
+            <div class="feature-text"><strong>Network Analytics</strong>: If you need to analyze network patterns, use pfx mode</div>
         </div>
         <div class="feature-item">
             <div class="feature-icon">3</div>
-            <div class="feature-text"><strong>Security Requirements</strong>: For maximum security, use ndx mode</div>
+            <div class="feature-text"><strong>Correlation Protection</strong>: If preventing correlation is important, use nd or ndx mode</div>
         </div>
         <div class="feature-item">
             <div class="feature-icon">4</div>
-            <div class="feature-text"><strong>Performance Considerations</strong>: Deterministic mode is fastest, followed by nd and ndx</div>
+            <div class="feature-text"><strong>Security Requirements</strong>: For maximum security, use ndx mode</div>
         </div>
         <div class="feature-item">
             <div class="feature-icon">5</div>
+            <div class="feature-text"><strong>Performance Considerations</strong>: Deterministic mode is fastest, followed by nd, ndx, and pfx</div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">6</div>
             <div class="feature-text"><strong>Storage Constraints</strong>: Consider the different output sizes when storage is limited</div>
         </div>
     </div>
     
-    <p>For most applications, the deterministic mode provides a good balance of security and usability. However, when privacy concerns are paramount, the non-deterministic modes offer stronger protection against correlation attacks.</p>
+    <p>For most applications, the deterministic mode provides a good balance of security and usability. When network analytics are needed, pfx mode preserves subnet relationships. When privacy concerns are paramount, the non-deterministic modes offer stronger protection against correlation attacks.</p>
     
     <h3>Mode Comparison</h3>
     
@@ -561,6 +777,7 @@ IPCrypt offers the following encryption modes:
             <tr>
                 <th>Feature</th>
                 <th>Deterministic</th>
+                <th>Prefix-Preserving (PFX)</th>
                 <th>Non-Deterministic (ND)</th>
                 <th>Extended ND (NDX)</th>
             </tr>
@@ -569,11 +786,13 @@ IPCrypt offers the following encryption modes:
             <tr>
                 <td>Underlying Algorithm</td>
                 <td>AES-128</td>
+                <td>Dual AES-128</td>
                 <td>KIASU-BC</td>
                 <td>AES-XTS</td>
             </tr>
             <tr>
                 <td>Format Preservation</td>
+                <td><span class="check">✓</span></td>
                 <td><span class="check">✓</span></td>
                 <td><span class="x">✗</span></td>
                 <td><span class="x">✗</span></td>
@@ -581,17 +800,20 @@ IPCrypt offers the following encryption modes:
             <tr>
                 <td>Correlation Protection</td>
                 <td><span class="x">✗</span></td>
+                <td><span class="x">✗</span></td>
                 <td><span class="check">✓</span></td>
                 <td><span class="check">✓</span></td>
             </tr>
             <tr>
                 <td>Output Size</td>
                 <td>16 bytes</td>
+                <td>4/16 bytes</td>
                 <td>24 bytes</td>
                 <td>32 bytes</td>
             </tr>
             <tr>
                 <td>Tweak Size</td>
+                <td>N/A</td>
                 <td>N/A</td>
                 <td>8 bytes</td>
                 <td>16 bytes</td>
@@ -599,18 +821,21 @@ IPCrypt offers the following encryption modes:
             <tr>
                 <td>Security Margin</td>
                 <td>Standard</td>
+                <td>Beyond Birthday</td>
                 <td>High</td>
                 <td>Highest</td>
             </tr>
             <tr>
                 <td>Performance</td>
                 <td>Fastest</td>
+                <td>Slower (bit-by-bit)</td>
                 <td>Fast</td>
                 <td>Moderate</td>
             </tr>
             <tr>
                 <td>Recommended Use Case</td>
                 <td>Logging, Rate Limiting</td>
+                <td>Network Analytics</td>
                 <td>Data Sharing</td>
                 <td>Highest Security Needs</td>
             </tr>
