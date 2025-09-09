@@ -3,7 +3,7 @@ layout: page
 title: IPCrypt Specification
 description: Detailed technical specification for IPCrypt, defining methods for IP address encryption and obfuscation.
 permalink: /spec/
-redirect_to: https://datatracker.ietf.org/doc/draft-denis-ipcrypt/
+redirect_to: https://ipcrypt-std.github.io/draft-denis-ipcrypt/#go.draft-denis-ipcrypt.html
 ---
 
 <div class="spec-redirect p-8 text-center">
@@ -17,7 +17,7 @@ redirect_to: https://datatracker.ietf.org/doc/draft-denis-ipcrypt/
         If you are not automatically redirected, please click the button below:
     </p>
     
-    <a href="https://datatracker.ietf.org/doc/draft-denis-ipcrypt/" class="btn btn-primary">
+    <a href="https://ipcrypt-std.github.io/draft-denis-ipcrypt/#go.draft-denis-ipcrypt.html" class="btn btn-primary">
         View HTML Specification
     </a>
     
@@ -38,6 +38,6 @@ redirect_to: https://datatracker.ietf.org/doc/draft-denis-ipcrypt/
 <script>
     // Redirect to the HTML specification after a short delay
     setTimeout(function() {
-        window.location.href = "https://datatracker.ietf.org/doc/draft-denis-ipcrypt/";
+        window.location.href = "https://ipcrypt-std.github.io/draft-denis-ipcrypt/#go.draft-denis-ipcrypt.html";
     }, 1500);
 </script>
