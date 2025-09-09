@@ -30,6 +30,7 @@ permalink: /playground/
             <label for="encryption-mode" class="block mb-2 font-medium">Encryption Mode:</label>
             <select id="encryption-mode" class="w-full p-2 border rounded">
                 <option value="deterministic">ipcrypt-deterministic</option>
+                <option value="pfx">ipcrypt-pfx</option>
                 <option value="nd">ipcrypt-nd</option>
                 <option value="ndx">ipcrypt-ndx</option>
             </select>
@@ -65,6 +66,7 @@ permalink: /playground/
         
         <ul class="list-disc pl-6 mb-4">
             <li><strong>ipcrypt-deterministic</strong>: Format-preserving encryption that always produces the same output for the same input and key. Requires a 16-byte (32 hex chars) key.</li>
+            <li><strong>ipcrypt-pfx</strong>: Prefix-preserving encryption that maintains network structure. Addresses from the same subnet share encrypted prefixes. Requires a 32-byte (64 hex chars) key with different halves.</li>
             <li><strong>ipcrypt-nd</strong>: Non-deterministic encryption using KIASU-BC with an 8-byte tweak. Requires a 16-byte (32 hex chars) key and produces a 24-byte output.</li>
             <li><strong>ipcrypt-ndx</strong>: Non-deterministic encryption using AES-XTS with a 16-byte tweak. Requires a 32-byte (64 hex chars) key and produces a 32-byte output.</li>
         </ul>
@@ -99,6 +101,11 @@ document.addEventListener('DOMContentLoaded', function() {
             generateTweakBtn.style.display = 'none';
             encryptionKeyInput.placeholder = 'Enter a 16-byte hex key (32 characters)';
             keyHelp.textContent = 'For deterministic mode: 16 bytes (32 hex chars). Default key provided for demonstration.';
+        } else if (this.value === 'pfx') {
+            tweakContainer.style.display = 'none';
+            generateTweakBtn.style.display = 'none';
+            encryptionKeyInput.placeholder = 'Enter a 32-byte hex key (64 characters)';
+            keyHelp.textContent = 'For pfx mode: 32 bytes (64 hex chars) with different halves. Generate a new key for best results.';
         } else {
             tweakContainer.style.display = 'block';
             generateTweakBtn.style.display = 'inline-flex';
@@ -121,8 +128,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const mode = encryptionModeSelect.value;
         let keyLength = 32; // 16 bytes = 32 hex chars for deterministic and nd modes
         
-        if (mode === 'ndx') {
-            keyLength = 64; // 32 bytes = 64 hex chars for ndx mode
+        if (mode === 'ndx' || mode === 'pfx') {
+            keyLength = 64; // 32 bytes = 64 hex chars for ndx and pfx modes
         }
         
         const key = generateRandomHex(keyLength);
@@ -157,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Please enter an IP address');
             }
             
-            const expectedKeyLength = mode === 'ndx' ? 32 : 16;
+            const expectedKeyLength = (mode === 'ndx' || mode === 'pfx') ? 32 : 16;
             if (key.length !== expectedKeyLength) {
                 throw new Error(`Key must be ${expectedKeyLength} bytes (${expectedKeyLength * 2} hex characters) for ${mode} mode`);
             }
@@ -168,6 +175,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (mode === 'deterministic') {
                 console.log('Using deterministic mode');
                 result = ipcrypt.deterministic.encrypt(ip, key);
+            } else if (mode === 'pfx') {
+                console.log('Using pfx mode');
+                result = ipcrypt.pfx.encrypt(ip, key);
             } else {
                 const tweak = hexToBytes(tweakInput.value.trim());
                 
@@ -205,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Please enter an encrypted value');
             }
             
-            const expectedKeyLength = mode === 'ndx' ? 32 : 16;
+            const expectedKeyLength = (mode === 'ndx' || mode === 'pfx') ? 32 : 16;
             if (key.length !== expectedKeyLength) {
                 throw new Error(`Key must be ${expectedKeyLength} bytes (${expectedKeyLength * 2} hex characters) for ${mode} mode`);
             }
@@ -214,6 +224,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (mode === 'deterministic') {
                 result = ipcrypt.deterministic.decrypt(encryptedValue, key);
+            } else if (mode === 'pfx') {
+                result = ipcrypt.pfx.decrypt(encryptedValue, key);
             } else {
                 const tweak = hexToBytes(tweakInput.value.trim());
                 

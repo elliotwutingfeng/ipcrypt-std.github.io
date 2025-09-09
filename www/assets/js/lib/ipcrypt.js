@@ -9,6 +9,7 @@
     // Global namespace
     window.ipcrypt = {
         deterministic: {},
+        pfx: {},
         nd: {},
         ndx: {}
     };
@@ -664,6 +665,254 @@
         }
 
         return bytesToIp(state);
+    };
+
+    // ============================
+    // IPCrypt PFX Mode (Prefix-preserving)
+    // ============================
+
+    /**
+     * Check if IP address is IPv4 based on 16-byte representation.
+     */
+    function isIPv4(bytes16) {
+        return bytes16.slice(0, 10).every(b => b === 0) &&
+               bytes16[10] === 0xff && bytes16[11] === 0xff;
+    }
+
+    /**
+     * Extract bit at position from 16-byte array.
+     * Position: 0 = LSB of byte 15, 127 = MSB of byte 0
+     */
+    function getBit(data, position) {
+        const byteIndex = 15 - Math.floor(position / 8);
+        const bitIndex = position % 8;
+        return (data[byteIndex] >> bitIndex) & 1;
+    }
+
+    /**
+     * Set bit at position in 16-byte array.
+     * Position: 0 = LSB of byte 15, 127 = MSB of byte 0
+     */
+    function setBit(data, position, value) {
+        const byteIndex = 15 - Math.floor(position / 8);
+        const bitIndex = position % 8;
+        
+        if (value) {
+            data[byteIndex] |= (1 << bitIndex);
+        } else {
+            data[byteIndex] &= ~(1 << bitIndex);
+        }
+    }
+
+    /**
+     * Shift a 16-byte array one bit to the left.
+     * The most significant bit is lost, and a zero bit is shifted in from the right.
+     */
+    function shiftLeftOneBit(data) {
+        const result = new Uint8Array(16);
+        let carry = 0;
+        
+        // Process from least significant byte (byte 15) to most significant (byte 0)
+        for (let i = 15; i >= 0; i--) {
+            // Current byte shifted left by 1, with carry from previous byte
+            result[i] = ((data[i] << 1) | carry) & 0xFF;
+            // Extract the bit that will be carried to the next byte
+            carry = (data[i] >> 7) & 1;
+        }
+        
+        return result;
+    }
+
+    /**
+     * Pad prefix for prefix_len_bits=0 (IPv6).
+     * Sets separator bit at position 0 (LSB of byte 15).
+     */
+    function padPrefix0() {
+        const padded = new Uint8Array(16);
+        padded[15] = 0x01; // Set bit at position 0 (LSB of byte 15)
+        return padded;
+    }
+
+    /**
+     * Pad prefix for prefix_len_bits=96 (IPv4).
+     * Result: 00000001 00...00 0000ffff (separator at pos 96, then 96 bits)
+     */
+    function padPrefix96() {
+        const padded = new Uint8Array(16);
+        padded[3] = 0x01;  // Set bit at position 96 (bit 0 of byte 3)
+        padded[14] = 0xFF;
+        padded[15] = 0xFF;
+        return padded;
+    }
+
+    /**
+     * Perform AES-128 encryption on a 16-byte block (for pfx mode)
+     */
+    function aesEncryptPfx(key, input) {
+        const state = new Uint8Array(input);
+        const expandedKey = expandKey(key);
+        
+        // Initial round
+        for (let i = 0; i < 16; i++) {
+            state[i] ^= expandedKey[i];
+        }
+        
+        // Main rounds
+        for (let round = 1; round < 10; round++) {
+            subBytes(state);
+            shiftRows(state);
+            mixColumns(state);
+            for (let i = 0; i < 16; i++) {
+                state[i] ^= expandedKey[round * 16 + i];
+            }
+        }
+        
+        // Final round
+        subBytes(state);
+        shiftRows(state);
+        for (let i = 0; i < 16; i++) {
+            state[i] ^= expandedKey[160 + i];
+        }
+        
+        return state;
+    }
+
+    ipcrypt.pfx.encrypt = function(ip, key) {
+        if (!(key instanceof Uint8Array) || key.length !== 32) {
+            throw new Error('Key must be 32 bytes for pfx mode');
+        }
+        
+        // Split the key into two AES-128 keys
+        const K1 = key.slice(0, 16);
+        const K2 = key.slice(16, 32);
+        
+        // Check that K1 and K2 are different
+        if (K1.every((byte, i) => byte === K2[i])) {
+            throw new Error('The two halves of the key must be different');
+        }
+        
+        // Convert IP to 16-byte representation
+        const bytes16 = ipToBytes(ip);
+        
+        // Initialize encrypted result with zeros
+        const encrypted = new Uint8Array(16);
+        
+        // Determine starting point
+        const ipv4 = isIPv4(bytes16);
+        const prefixStart = ipv4 ? 96 : 0;
+        
+        // If IPv4, copy the IPv4-mapped prefix
+        if (ipv4) {
+            encrypted.set(bytes16.slice(0, 12), 0);
+        }
+        
+        // Initialize padded_prefix for the starting prefix length
+        let paddedPrefix;
+        if (ipv4) {
+            paddedPrefix = padPrefix96();
+        } else {
+            paddedPrefix = padPrefix0();
+        }
+        
+        // Process each bit position
+        for (let prefixLenBits = prefixStart; prefixLenBits < 128; prefixLenBits++) {
+            // Compute pseudorandom function with dual AES encryption
+            const e1 = aesEncryptPfx(K1, paddedPrefix);
+            const e2 = aesEncryptPfx(K2, paddedPrefix);
+            
+            // XOR the two encryptions
+            const e = new Uint8Array(16);
+            for (let i = 0; i < 16; i++) {
+                e[i] = e1[i] ^ e2[i];
+            }
+            
+            // We only need the least significant bit of byte 15
+            const cipherBit = e[15] & 1;
+            
+            // Extract the current bit from the original IP
+            const currentBitPos = 127 - prefixLenBits;
+            
+            // Set the bit in the encrypted result
+            const originalBit = getBit(bytes16, currentBitPos);
+            setBit(encrypted, currentBitPos, cipherBit ^ originalBit);
+            
+            // Prepare padded_prefix for next iteration
+            // Shift left by 1 bit and insert the next bit from bytes16
+            paddedPrefix = shiftLeftOneBit(paddedPrefix);
+            const bitToInsert = getBit(bytes16, 127 - prefixLenBits);
+            setBit(paddedPrefix, 0, bitToInsert);
+        }
+        
+        return bytesToIp(encrypted);
+    };
+
+    ipcrypt.pfx.decrypt = function(encryptedIp, key) {
+        if (!(key instanceof Uint8Array) || key.length !== 32) {
+            throw new Error('Key must be 32 bytes for pfx mode');
+        }
+        
+        // Split the key into two AES-128 keys
+        const K1 = key.slice(0, 16);
+        const K2 = key.slice(16, 32);
+        
+        // Check that K1 and K2 are different
+        if (K1.every((byte, i) => byte === K2[i])) {
+            throw new Error('The two halves of the key must be different');
+        }
+        
+        // Convert encrypted IP to 16-byte representation
+        const encryptedBytes = ipToBytes(encryptedIp);
+        
+        // Initialize decrypted result with zeros
+        const decrypted = new Uint8Array(16);
+        
+        // Determine starting point
+        const ipv4 = isIPv4(encryptedBytes);
+        const prefixStart = ipv4 ? 96 : 0;
+        
+        // If IPv4, copy the IPv4-mapped prefix
+        if (ipv4) {
+            decrypted.set(encryptedBytes.slice(0, 12), 0);
+        }
+        
+        // Initialize padded_prefix for the starting prefix length
+        let paddedPrefix;
+        if (prefixStart === 0) {
+            paddedPrefix = padPrefix0();
+        } else {
+            paddedPrefix = padPrefix96();
+        }
+        
+        // Process each bit position
+        for (let prefixLenBits = prefixStart; prefixLenBits < 128; prefixLenBits++) {
+            // Compute pseudorandom function with dual AES encryption
+            const e1 = aesEncryptPfx(K1, paddedPrefix);
+            const e2 = aesEncryptPfx(K2, paddedPrefix);
+            
+            // XOR the two encryptions
+            const e = new Uint8Array(16);
+            for (let i = 0; i < 16; i++) {
+                e[i] = e1[i] ^ e2[i];
+            }
+            
+            // We only need the least significant bit of byte 15
+            const cipherBit = e[15] & 1;
+            
+            // Extract the current bit from the encrypted IP
+            const currentBitPos = 127 - prefixLenBits;
+            
+            // Set the bit in the decrypted result
+            const encryptedBit = getBit(encryptedBytes, currentBitPos);
+            setBit(decrypted, currentBitPos, cipherBit ^ encryptedBit);
+            
+            // Prepare padded_prefix for next iteration
+            // Shift left by 1 bit and insert the next bit from decrypted
+            paddedPrefix = shiftLeftOneBit(paddedPrefix);
+            const bitToInsert = getBit(decrypted, 127 - prefixLenBits);
+            setBit(paddedPrefix, 0, bitToInsert);
+        }
+        
+        return bytesToIp(decrypted);
     };
 
     // ============================
