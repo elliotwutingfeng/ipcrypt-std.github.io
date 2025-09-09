@@ -202,10 +202,6 @@ permalink: /
                 </div>
             </div>
         </div>
-
-        <div class="text-center mt-12">
-            <a href="{{ site.baseurl }}/playground/" class="btn btn-primary">Try the Interactive Playground</a>
-        </div>
     </div>
 </section>
 
