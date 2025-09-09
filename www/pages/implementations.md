@@ -212,7 +212,18 @@ Below is a comprehensive list of all available IPCrypt implementations. Click on
             </tr>
             <tr>
                 <td class="py-2 px-4 border">Rust</td>
-                <td class="py-2 px-4 border">Native/Bindings</td>
+                <td class="py-2 px-4 border">Bindings</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border text-center">✓</td>
+                <td class="py-2 px-4 border">ISC</td>
+            </tr>
+            <tr>
+                <td class="py-2 px-4 border">Rust</td>
+                <td class="py-2 px-4 border">Native</td>
                 <td class="py-2 px-4 border text-center">✓</td>
                 <td class="py-2 px-4 border text-center">-</td>
                 <td class="py-2 px-4 border text-center">✓</td>
