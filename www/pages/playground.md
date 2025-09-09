@@ -23,14 +23,13 @@ permalink: /playground/
         <div class="mb-4">
             <label for="encryption-key" class="block mb-2 font-medium">Encryption Key (hex):</label>
             <input type="text" id="encryption-key" class="w-full p-2 border rounded" placeholder="Enter a 16-byte hex key (32 characters)" value="000102030405060708090a0b0c0d0e0f">
-            <p class="text-sm text-gray-600 mt-1">For demonstration purposes, a default key is provided. In production, use a secure random key.</p>
+            <p class="text-sm text-gray-600 mt-1" id="key-help">For deterministic and nd modes: 16 bytes (32 hex chars). For ndx mode: 32 bytes (64 hex chars). Default key provided for demonstration.</p>
         </div>
         
         <div class="mb-4">
             <label for="encryption-mode" class="block mb-2 font-medium">Encryption Mode:</label>
             <select id="encryption-mode" class="w-full p-2 border rounded">
                 <option value="deterministic">ipcrypt-deterministic</option>
-                <option value="pfx">ipcrypt-pfx</option>
                 <option value="nd">ipcrypt-nd</option>
                 <option value="ndx">ipcrypt-ndx</option>
             </select>
@@ -65,10 +64,9 @@ permalink: /playground/
         <h3 class="text-xl font-bold mb-2">Encryption Modes</h3>
         
         <ul class="list-disc pl-6 mb-4">
-            <li><strong>ipcrypt-deterministic</strong>: Format-preserving encryption that always produces the same output for the same input and key.</li>
-            <li><strong>ipcrypt-pfx</strong>: Prefix-preserving encryption that maintains network structure. Addresses from the same subnet share encrypted prefixes.</li>
-            <li><strong>ipcrypt-nd</strong>: Non-deterministic encryption using KIASU-BC with an 8-byte tweak. Produces a 24-byte output.</li>
-            <li><strong>ipcrypt-ndx</strong>: Non-deterministic encryption using AES-XTS with a 16-byte tweak. Produces a 32-byte output.</li>
+            <li><strong>ipcrypt-deterministic</strong>: Format-preserving encryption that always produces the same output for the same input and key. Requires a 16-byte (32 hex chars) key.</li>
+            <li><strong>ipcrypt-nd</strong>: Non-deterministic encryption using KIASU-BC with an 8-byte tweak. Requires a 16-byte (32 hex chars) key and produces a 24-byte output.</li>
+            <li><strong>ipcrypt-ndx</strong>: Non-deterministic encryption using AES-XTS with a 16-byte tweak. Requires a 32-byte (64 hex chars) key and produces a 32-byte output.</li>
         </ul>
         
         <p class="mb-4">
@@ -92,11 +90,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const resultContainer = document.getElementById('result-container');
     const resultText = document.getElementById('result-text');
     
-    // Show/hide tweak input based on encryption mode
+    // Show/hide tweak input and update key requirements based on encryption mode
     encryptionModeSelect.addEventListener('change', function() {
+        const keyHelp = document.getElementById('key-help');
+        
         if (this.value === 'deterministic') {
             tweakContainer.style.display = 'none';
             generateTweakBtn.style.display = 'none';
+            encryptionKeyInput.placeholder = 'Enter a 16-byte hex key (32 characters)';
+            keyHelp.textContent = 'For deterministic mode: 16 bytes (32 hex chars). Default key provided for demonstration.';
         } else {
             tweakContainer.style.display = 'block';
             generateTweakBtn.style.display = 'inline-flex';
@@ -104,15 +106,26 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update placeholder based on mode
             if (this.value === 'nd') {
                 tweakInput.placeholder = 'Enter an 8-byte tweak (16 hex characters)';
+                encryptionKeyInput.placeholder = 'Enter a 16-byte hex key (32 characters)';
+                keyHelp.textContent = 'For nd mode: 16 bytes (32 hex chars). Default key provided for demonstration.';
             } else if (this.value === 'ndx') {
                 tweakInput.placeholder = 'Enter a 16-byte tweak (32 hex characters)';
+                encryptionKeyInput.placeholder = 'Enter a 32-byte hex key (64 characters)';
+                keyHelp.textContent = 'For ndx mode: 32 bytes (64 hex chars). Generate a new key or extend the default.';
             }
         }
     });
     
     // Generate random key
     generateKeyBtn.addEventListener('click', function() {
-        const key = generateRandomHex(32); // 16 bytes = 32 hex chars
+        const mode = encryptionModeSelect.value;
+        let keyLength = 32; // 16 bytes = 32 hex chars for deterministic and nd modes
+        
+        if (mode === 'ndx') {
+            keyLength = 64; // 32 bytes = 64 hex chars for ndx mode
+        }
+        
+        const key = generateRandomHex(keyLength);
         encryptionKeyInput.value = key;
     });
     
@@ -144,8 +157,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Please enter an IP address');
             }
             
-            if (key.length !== 16) {
-                throw new Error('Key must be 16 bytes (32 hex characters)');
+            const expectedKeyLength = mode === 'ndx' ? 32 : 16;
+            if (key.length !== expectedKeyLength) {
+                throw new Error(`Key must be ${expectedKeyLength} bytes (${expectedKeyLength * 2} hex characters) for ${mode} mode`);
             }
             
             let result;
@@ -191,8 +205,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Please enter an encrypted value');
             }
             
-            if (key.length !== 16) {
-                throw new Error('Key must be 16 bytes (32 hex characters)');
+            const expectedKeyLength = mode === 'ndx' ? 32 : 16;
+            if (key.length !== expectedKeyLength) {
+                throw new Error(`Key must be ${expectedKeyLength} bytes (${expectedKeyLength * 2} hex characters) for ${mode} mode`);
             }
             
             let result;
