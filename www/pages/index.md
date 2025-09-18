@@ -14,7 +14,6 @@ permalink: /
         <div class="flex flex-wrap justify-center gap-4">
             <a href="{{ site.baseurl }}/about/" class="btn btn-primary">Learn More</a>
             <a href="https://datatracker.ietf.org/doc/draft-denis-ipcrypt/" class="btn btn-secondary" target="_blank" rel="noopener">Read the Specification</a>
-            <a href="https://eprint.iacr.org/2025/1689" class="btn btn-secondary" target="_blank" rel="noopener">Read the Paper</a>
             <a href="{{ site.baseurl }}/playground/" class="btn btn-accent">Try the Playground</a>
         </div>
     </div>
