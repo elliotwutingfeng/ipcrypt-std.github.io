@@ -246,7 +246,8 @@ If you have questions about IPCrypt:
 1. **GitHub Issues**: You can post questions on the [GitHub repository]({{ site.github_repo }}/issues)
 2. **Join In**: Feel free to share your experiences or suggestions
 
-### Related RFCs
+### Related RFCs and Papers
 
 - [RFC6973: Privacy Considerations for Internet Protocols](https://datatracker.ietf.org/doc/html/rfc6973)
 - [RFC7258: Pervasive Monitoring Is an Attack](https://datatracker.ietf.org/doc/html/rfc7258)
+- [IPCrypt Paper (IACR ePrint)](https://eprint.iacr.org/2025/1689)
